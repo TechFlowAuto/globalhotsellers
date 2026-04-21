@@ -25,19 +25,19 @@ jobs:
           npm run build 2>&1
           
           echo "=== CHECKING ==="
-          if [ -d ".next" ]; then
-            echo "Build successful, exporting..."
-            npx next export 2>&1
-          else
-            echo "Build failed - no .next directory"
-            exit 1
-          fi
-          
+          # Next.js 14+ with output: 'export' automatically creates out directory
           if [ -d "out" ]; then
-            echo "Export successful"
+            echo "Build and export successful!"
+            echo "out directory contents:"
             ls -la out/
+          elif [ -d ".next" ]; then
+            echo "Build successful but no out directory"
+            echo ".next directory exists, checking for static export..."
+            # 检查是否有静态导出文件
+            find .next -name "*.html" -type f | head -5
+            exit 1
           else
-            echo "Export failed - no out directory"
+            echo "Build failed"
             exit 1
           fi
         env:
