@@ -5,23 +5,47 @@ on:
     branches:
       - main
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Debug - Show versions
+        run: |
+          echo "Node.js version:"
+          node --version
+          echo "npm version:"
+          npm --version
+          echo "Next.js version (if available):"
+          npx next --version || echo "Next.js not found in npx"
+      
+      - name: Checkout code
         uses: actions/checkout@v4
       
       - name: Setup Node.js 24
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'npm'
       
       - name: Install dependencies
-        run: npm install
+        run: npm install --verbose
+      
+      - name: Debug - Check Next.js availability
+        run: |
+          echo "Checking package.json..."
+          cat package.json | grep -A5 -B5 "next\|scripts"
+          echo "\nChecking node_modules..."
+          ls -la node_modules/.bin/ | grep next || echo "No next in node_modules/.bin/"
       
       - name: Build project
-        run: npm run build
+        run: |
+          echo "Starting build..."
+          npm run build || (echo "Build failed with exit code $?" && exit 1)
+          echo "Build successful!"
         env:
           NEXT_PUBLIC_SITE_URL: https://globalhotsellers.net
           NEXT_PUBLIC_SITE_NAME: GlobalHotSellers
