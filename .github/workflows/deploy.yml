@@ -3,12 +3,18 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:  # 允许手动触发
 
 # 必要的权限配置
 permissions:
   contents: read
   pages: write
   id-token: write
+
+# 并发控制
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -21,24 +27,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
+          cache: 'npm'  # 启用npm缓存加速构建
       
-      - name: Install and build
-        run: |
-          echo "=== INSTALLING ==="
-          npm install
-          
-          echo "=== BUILDING ==="
-          npm run build 2>&1
-          
-          echo "=== CHECKING ==="
-          if [ -d "out" ]; then
-            echo "✅ Build and export successful!"
-            echo "out directory contents:"
-            ls -la out/
-          else
-            echo "❌ Build failed - no out directory"
-            exit 1
-          fi
+      - name: Install dependencies
+        run: npm ci  # 使用ci确保一致性
+      
+      - name: Build with Next.js
+        run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://globalhotsellers.net
           NEXT_PUBLIC_SITE_NAME: GlobalHotSellers
