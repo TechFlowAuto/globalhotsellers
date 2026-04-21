@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "regions": ["hkg1"],
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://globalhotsellers.net",
+    "NEXT_PUBLIC_SITE_NAME": "GlobalHotSellers",
+    "NEXT_PUBLIC_SITE_DESCRIPTION": "Discover What's Hot Worldwide - Global trends, local deals",
+    "NEXT_PUBLIC_GA_ID": "",
+    "NEXT_PUBLIC_AMAZON_TAG": ""
+  }
+}
