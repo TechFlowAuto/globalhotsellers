@@ -5,8 +5,8 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  // GitHub Pages需要basePath
-  basePath: '/globalhotsellers',
+  // 对于自定义域名，不使用basePath
+  // basePath: '/globalhotsellers',
 }
 
 module.exports = nextConfig

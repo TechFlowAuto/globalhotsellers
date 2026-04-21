@@ -42,8 +42,6 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://globalhotsellers.net
           NEXT_PUBLIC_SITE_NAME: GlobalHotSellers
           NEXT_PUBLIC_SITE_DESCRIPTION: Discover What's Hot Worldwide
-          # 告诉Next.js这是GitHub Pages部署
-          GITHUB_PAGES: 'true'
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
