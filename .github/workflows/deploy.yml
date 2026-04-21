@@ -27,10 +27,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: 'npm'  # 启用npm缓存加速构建
       
       - name: Install dependencies
-        run: npm ci  # 使用ci确保一致性
+        run: npm install  # 使用install，因为项目没有package-lock.json
       
       - name: Build with Next.js
         run: npm run build
