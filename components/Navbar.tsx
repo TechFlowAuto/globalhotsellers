@@ -13,6 +13,7 @@ export default function Navbar() {
     { label: 'Price Tracker', href: '/tracker' },
     { label: 'Blog', href: '/blog' },
     { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
   ]
 
   return (

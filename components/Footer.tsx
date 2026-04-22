@@ -19,11 +19,25 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
+            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">
+              Privacy Policy
+            </a>
+            <a href="/about" className="text-gray-400 hover:text-white transition-colors">
+              About Us
+            </a>
+            <a href="/contact" className="text-gray-400 hover:text-white transition-colors">
+              Contact
+            </a>
+          </div>
           <p>
             This is a demo project. Product data is for demonstration purposes only.
           </p>
           <p className="mt-1">
             Not affiliated with Amazon, eBay, AliExpress, or any other marketplace.
+          </p>
+          <p className="mt-2 text-gray-400">
+            As an Amazon Associate I earn from qualifying purchases.
           </p>
         </div>
       </div>
