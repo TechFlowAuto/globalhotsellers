@@ -3,13 +3,11 @@
 import { useState, FormEvent } from 'react'
 import { Mail, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react'
 
-/**
- * EmailSubscribe — Newsletter signup component
- *
- * Uses Formspree (free tier) as the backend.
- * Replace the action URL with your own Formspree form ID.
- * Sign up: https://formspree.io
- */
+// 用 GitHub Gist API 存储订阅数据
+// 你的 GitHub token 和 Gist ID（会在你创建后更新）
+const GIST_ID = '' // 稍后填入
+const GITHUB_TOKEN = '' // 稍后填入
+
 export default function EmailSubscribe({
   variant = 'inline',
   title = 'Get Hot Deals First',
@@ -30,7 +28,11 @@ export default function EmailSubscribe({
     setMessage('')
 
     try {
-      const res = await fetch('https://formspree.io/f/mldjvpno', {
+      // 方案1: 尝试连接到本地后端（Mac Mini/本机服务）
+      // 如果有 Cloudflare Tunnel 或 ngrok，用真实域名
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ghs-subscribe.loca.lt'
+
+      const res = await fetch(`${BACKEND_URL}/api/subscribe`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
@@ -43,8 +45,12 @@ export default function EmailSubscribe({
       })
 
       if (res.ok) {
+        const data = await res.json()
         setStatus('success')
-        setMessage('You\'re in! Check your inbox for trending deals. 🔥')
+        setMessage(data.alreadySubscribed
+          ? 'You\'re already subscribed! 🎉'
+          : "You're in! Check your inbox for trending deals. 🔥"
+        )
         setEmail('')
         setName('')
       } else {
@@ -56,7 +62,7 @@ export default function EmailSubscribe({
     }
   }
 
-  // Compact inline form (for hero sections or footer)
+  // Compact inline form
   if (variant === 'inline') {
     return (
       <form onSubmit={handleSubmit} className="w-full">
@@ -103,7 +109,7 @@ export default function EmailSubscribe({
     )
   }
 
-  // Full hero variant (with name field)
+  // Full hero variant
   return (
     <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20">
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
