@@ -1,6 +1,7 @@
 'use client'
 
 import { Globe, TrendingUp, Zap, Shield } from 'lucide-react'
+import EmailSubscribe from './EmailSubscribe'
 
 export default function HeroSection() {
   return (
@@ -103,6 +104,15 @@ export default function HeroSection() {
                 <div className="text-2xl font-bold text-red-500">AliExpress</div>
                 <div className="text-2xl font-bold text-blue-700">Walmart</div>
                 <div className="text-2xl font-bold text-green-600">Etsy</div>
+              </div>
+            </div>
+
+            {/* Email Subscribe */}
+            <div className="pt-6">
+              <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-xl p-6 border border-primary/10">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">🔥 Get Hot Deals First</h3>
+                <p className="text-gray-500 text-sm mb-4">Subscribe and be the first to know about trending products.</p>
+                <EmailSubscribe variant="inline" />
               </div>
             </div>
           </div>
