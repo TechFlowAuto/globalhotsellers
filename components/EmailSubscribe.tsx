@@ -30,7 +30,7 @@ export default function EmailSubscribe({
     try {
       // 方案1: 尝试连接到本地后端（Mac Mini/本机服务）
       // 如果有 Cloudflare Tunnel 或 ngrok，用真实域名
-      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://408f67f67a9da407-1-199-129-133.serveousercontent.com'
+      const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://362290700f14bf7d-1-199-129-133.serveousercontent.com'
 
       const res = await fetch(`${BACKEND_URL}/api/subscribe`, {
         method: 'POST',
