@@ -1,0 +1,161 @@
+export interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  originalPrice?: string;
+  currency: string;
+  imageUrl: string;
+  platform: 'Amazon' | 'eBay' | 'AliExpress' | 'Walmart' | 'Etsy';
+  category: string;
+  rating: number;
+  reviewCount: number;
+  badge?: 'hot' | 'trending' | 'new';
+  affiliateUrl: string;
+  source: string;
+}
+
+export const featuredProducts: Product[] = [
+  {
+    id: '1',
+    title: 'Wireless Noise-Cancelling Headphones',
+    description: 'Premium over-ear headphones with active noise cancellation, 30-hour battery life, and ultra-comfortable memory foam ear cushions.',
+    price: '$79.99',
+    originalPrice: '$149.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/headphones/400/400',
+    platform: 'Amazon',
+    category: 'Electronics',
+    rating: 4.7,
+    reviewCount: 15234,
+    badge: 'hot',
+    affiliateUrl: 'https://amazon.com/dp/example1',
+    source: 'Amazon Best Sellers #1 in Headphones',
+  },
+  {
+    id: '2',
+    title: 'Smart Fitness Tracker Pro',
+    description: 'Advanced health monitoring with heart rate, blood oxygen, sleep tracking, and 14-day battery life. Water resistant to 50m.',
+    price: '$45.99',
+    originalPrice: '$89.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/fitness/400/400',
+    platform: 'Amazon',
+    category: 'Electronics',
+    rating: 4.5,
+    reviewCount: 8921,
+    badge: 'trending',
+    affiliateUrl: 'https://amazon.com/dp/example2',
+    source: 'Amazon Movers & Shakers',
+  },
+  {
+    id: '3',
+    title: 'Portable Bluetooth Speaker',
+    description: 'Waterproof portable speaker with 360° sound, 20-hour playtime, and built-in microphone. Perfect for outdoor adventures.',
+    price: '$34.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/speaker/400/400',
+    platform: 'eBay',
+    category: 'Electronics',
+    rating: 4.6,
+    reviewCount: 5678,
+    badge: 'hot',
+    affiliateUrl: 'https://ebay.com/itm/example3',
+    source: 'eBay Trending',
+  },
+  {
+    id: '4',
+    title: 'Organic Bamboo Kitchen Cutting Board Set',
+    description: 'Set of 3 organic bamboo cutting boards with juice grooves. Eco-friendly, knife-friendly, and naturally antimicrobial.',
+    price: '$28.99',
+    originalPrice: '$49.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/cuttingboard/400/400',
+    platform: 'Amazon',
+    category: 'Home & Kitchen',
+    rating: 4.8,
+    reviewCount: 12301,
+    badge: 'hot',
+    affiliateUrl: 'https://amazon.com/dp/example4',
+    source: 'Amazon Best Sellers #1 in Cutting Boards',
+  },
+  {
+    id: '5',
+    title: 'LED Desk Lamp with Wireless Charger',
+    description: 'Smart LED desk lamp with wireless charging base, adjustable brightness and color temperature, USB charging port.',
+    price: '$42.99',
+    originalPrice: '$69.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/desklamp/400/400',
+    platform: 'AliExpress',
+    category: 'Home & Kitchen',
+    rating: 4.4,
+    reviewCount: 3456,
+    badge: 'trending',
+    affiliateUrl: 'https://aliexpress.com/item/example5',
+    source: 'AliExpress Hot Products',
+  },
+  {
+    id: '6',
+    title: 'Ergonomic Office Chair',
+    description: 'High-back mesh office chair with lumbar support, adjustable armrests, and breathable mesh back. Perfect for home office.',
+    price: '$189.99',
+    originalPrice: '$299.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/chair/400/400',
+    platform: 'Walmart',
+    category: 'Furniture',
+    rating: 4.3,
+    reviewCount: 7890,
+    affiliateUrl: 'https://walmart.com/ip/example6',
+    source: 'Walmart Top Rated',
+  },
+  {
+    id: '7',
+    title: 'Handmade Wool Throw Blanket',
+    description: 'Premium handwoven wool throw blanket. Each piece is unique. Soft, warm, and perfect for your living room decor.',
+    price: '$59.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/blanket/400/400',
+    platform: 'Etsy',
+    category: 'Home Decor',
+    rating: 4.9,
+    reviewCount: 2341,
+    badge: 'new',
+    affiliateUrl: 'https://etsy.com/listing/example7',
+    source: 'Etsy Trending',
+  },
+  {
+    id: '8',
+    title: 'Stainless Steel Water Bottle',
+    description: 'Double-wall vacuum insulated, keeps drinks cold 24h or hot 12h. BPA-free, leak-proof, fits most cup holders.',
+    price: '$24.99',
+    originalPrice: '$39.99',
+    currency: 'USD',
+    imageUrl: 'https://picsum.photos/seed/bottle/400/400',
+    platform: 'Amazon',
+    category: 'Sports & Outdoors',
+    rating: 4.6,
+    reviewCount: 21340,
+    badge: 'hot',
+    affiliateUrl: 'https://amazon.com/dp/example8',
+    source: 'Amazon Best Sellers',
+  },
+];
+
+export const platforms = [
+  { name: 'Amazon', color: '#FF9900', bg: 'bg-orange-50', textColor: 'text-orange-600' },
+  { name: 'eBay', color: '#0064D2', bg: 'bg-blue-50', textColor: 'text-blue-600' },
+  { name: 'AliExpress', color: '#E62E04', bg: 'bg-red-50', textColor: 'text-red-600' },
+  { name: 'Walmart', color: '#0071CE', bg: 'bg-blue-50', textColor: 'text-blue-700' },
+  { name: 'Etsy', color: '#F56400', bg: 'bg-orange-50', textColor: 'text-orange-600' },
+];
+
+export const categories = [
+  { name: 'Electronics', count: 156, icon: '⚡' },
+  { name: 'Home & Kitchen', count: 234, icon: '🏠' },
+  { name: 'Fashion', count: 189, icon: '👕' },
+  { name: 'Sports & Outdoors', count: 98, icon: '🏃' },
+  { name: 'Beauty', count: 145, icon: '💄' },
+  { name: 'Toys & Games', count: 67, icon: '🎮' },
+];
