@@ -1,0 +1,35 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NEXT_PUBLIC_SITE_URL = "https://globalhotsellers.net"
+  NEXT_PUBLIC_SITE_NAME = "GlobalHotSellers"
+  NEXT_PUBLIC_SITE_DESCRIPTION = "Discover What's Hot Worldwide - Global trends, local deals"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Next.js specific settings
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+
+[context.branch-deploy.environment]
+  NODE_ENV = "development"
+
+# Redirects for Next.js
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

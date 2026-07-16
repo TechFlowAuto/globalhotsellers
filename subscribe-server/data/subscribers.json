@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mrng76maqlmv",
+    "email": "test@globalhotsellers.net",
+    "name": "Test",
+    "source": "globalhotsellers.net",
+    "page": "/",
+    "subscribedAt": "2026-07-16T11:51:04.258Z",
+    "ip": "127.0.0.1",
+    "userAgent": "curl/8.7.1"
+  },
+  {
+    "id": "mrng8pmjy63j",
+    "email": "live-test@globalhotsellers.net",
+    "name": "Live Test",
+    "source": "globalhotsellers.net",
+    "page": "/",
+    "subscribedAt": "2026-07-16T11:52:15.547Z",
+    "ip": "127.0.0.1",
+    "userAgent": "curl/8.7.1"
+  },
+  {
+    "id": "mrngbnf9bcmq",
+    "email": "customer@example.com",
+    "name": "新客户",
+    "source": "globalhotsellers.net",
+    "page": "/",
+    "subscribedAt": "2026-07-16T11:54:32.661Z",
+    "ip": "127.0.0.1",
+    "userAgent": "curl/8.7.1"
+  }
+]

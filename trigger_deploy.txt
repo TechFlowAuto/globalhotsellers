@@ -1,0 +1,4 @@
+# Deployment Trigger File
+# This file triggers GitHub Actions workflow
+# Created: 2026-04-15 22:38
+# Purpose: Force GitHub to index and run deployment workflow
