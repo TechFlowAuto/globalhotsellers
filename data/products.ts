@@ -29,7 +29,7 @@ export const featuredProducts: Product[] = [
     rating: 4.3,
     reviewCount: 892,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B0DY2VVZWZ',
+    affiliateUrl: 'https://amazon.com/dp/B0DY2VVZWZ?tag=globalhotsell-20',
     source: 'Amazon — WHOOP + 12-Month Membership Bundle',
   },
   {
@@ -45,7 +45,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 279,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B0GH3474YH',
+    affiliateUrl: 'https://amazon.com/dp/B0GH3474YH?tag=globalhotsell-20',
     source: 'Amazon\'s Choice — Galaxy S26 512GB',
   },
   {
@@ -61,7 +61,7 @@ export const featuredProducts: Product[] = [
     rating: 4.4,
     reviewCount: 3890,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B09T4YZGQR',
+    affiliateUrl: 'https://amazon.com/dp/B09T4YZGQR?tag=globalhotsell-20',
     source: 'Amazon Best Seller in Robot Vacuums',
   },
   {
@@ -77,7 +77,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 5670,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B0CMW1N2WC',
+    affiliateUrl: 'https://amazon.com/dp/B0CMW1N2WC?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Hair Removal Devices',
   },
   {
@@ -93,7 +93,7 @@ export const featuredProducts: Product[] = [
     rating: 4.3,
     reviewCount: 2340,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B0DHGP8TZ2',
+    affiliateUrl: 'https://amazon.com/dp/B0DHGP8TZ2?tag=globalhotsell-20',
     source: 'Amazon Trending in Beauty & Personal Care',
   },
   {
@@ -109,7 +109,7 @@ export const featuredProducts: Product[] = [
     rating: 4.4,
     reviewCount: 12340,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B00L2PB3BW',
+    affiliateUrl: 'https://amazon.com/dp/B00L2PB3BW?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Self Tanners',
   },
   {
@@ -125,7 +125,7 @@ export const featuredProducts: Product[] = [
     rating: 4.3,
     reviewCount: 34560,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B093TSRPQM',
+    affiliateUrl: 'https://amazon.com/dp/B093TSRPQM?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Teeth Whitening',
   },
   {
@@ -141,7 +141,7 @@ export const featuredProducts: Product[] = [
     rating: 4.4,
     reviewCount: 26780,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B09PWN5QZS',
+    affiliateUrl: 'https://amazon.com/dp/B09PWN5QZS?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Colon Cleanse',
   },
   {
@@ -157,7 +157,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 38900,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B01BXLYEQ0',
+    affiliateUrl: 'https://amazon.com/dp/B01BXLYEQ0?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Fat Burner Supplements',
   },
   {
@@ -173,7 +173,7 @@ export const featuredProducts: Product[] = [
     rating: 4.7,
     reviewCount: 45670,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B003PFPFIE',
+    affiliateUrl: 'https://amazon.com/dp/B003PFPFIE?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Energy Drinks',
   },
   {
@@ -189,7 +189,7 @@ export const featuredProducts: Product[] = [
     rating: 4.6,
     reviewCount: 12340,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B00XA0DP86',
+    affiliateUrl: 'https://amazon.com/dp/B00XA0DP86?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Sparkling Juice',
   },
   {
@@ -205,7 +205,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 28900,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B08XQZX9K3',
+    affiliateUrl: 'https://amazon.com/dp/B08XQZX9K3?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Electrolyte Drinks',
   },
   {
@@ -221,7 +221,7 @@ export const featuredProducts: Product[] = [
     rating: 4.7,
     reviewCount: 38900,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B0CWZ9Q3KR',
+    affiliateUrl: 'https://amazon.com/dp/B0CWZ9Q3KR?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Bottled Water',
   },
   {
@@ -237,7 +237,7 @@ export const featuredProducts: Product[] = [
     rating: 4.6,
     reviewCount: 78900,
     badge: 'hot',
-    affiliateUrl: 'https://amazon.com/dp/B071JYV6LN',
+    affiliateUrl: 'https://amazon.com/dp/B071JYV6LN?tag=globalhotsell-20',
     source: 'Amazon Best Sellers #1 in Men\'s Sweatshirts',
   },
   {
@@ -253,7 +253,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 56780,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B0B3HTQ4YT',
+    affiliateUrl: 'https://amazon.com/dp/B0B3HTQ4YT?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Women\'s Leggings',
   },
   {
@@ -269,7 +269,7 @@ export const featuredProducts: Product[] = [
     rating: 4.4,
     reviewCount: 15670,
     badge: 'trending',
-    affiliateUrl: 'https://amazon.com/dp/B0922GS6FD',
+    affiliateUrl: 'https://amazon.com/dp/B0922GS6FD?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Pilates Socks',
   },
   {
@@ -285,7 +285,7 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 2890,
     badge: 'new',
-    affiliateUrl: 'https://amazon.com/dp/B004JTASAK',
+    affiliateUrl: 'https://amazon.com/dp/B004JTASAK?tag=globalhotsell-20',
     source: 'Amazon Best Sellers in Emergency Food Supplies',
   },
 ];
