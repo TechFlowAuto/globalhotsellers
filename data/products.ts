@@ -148,7 +148,7 @@ export const featuredProducts: Product[] = [
     price: '$199.00',
     originalPrice: '$239.00',
     currency: 'USD',
-    imageUrl: 'https://m.media-amazon.com/images/I/61TTqZv25uL._AC_SX679_.jpg',
+    imageUrl: '/images/whoop-one-hero.png',
     platform: 'Amazon',
     category: 'Electronics',
     rating: 4.3,
