@@ -4,3 +4,4 @@ out/
 .env
 *.zip
 .subscribe-server/node_modules/
+.vercel

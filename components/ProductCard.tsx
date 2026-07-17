@@ -1,6 +1,7 @@
 'use client'
 
-import { Star, ShoppingCart, ExternalLink, TrendingUp, Flame } from 'lucide-react'
+import { Star, ShoppingCart, ExternalLink, TrendingUp, Flame, Info } from 'lucide-react'
+import Link from 'next/link'
 
 interface Product {
   id: string
@@ -66,9 +67,11 @@ export default function ProductCard({ product }: { product: Product }) {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="font-bold text-gray-900 mb-1 line-clamp-2 group-hover:text-primary transition-colors">
-          {product.title}
-        </h3>
+        <Link href={`/product/${product.id}`} className="group/title">
+          <h3 className="font-bold text-gray-900 mb-1 line-clamp-2 group-hover/title:text-primary transition-colors">
+            {product.title}
+          </h3>
+        </Link>
         
         {/* Rating */}
         <div className="flex items-center space-x-1 mb-2">
@@ -107,17 +110,26 @@ export default function ProductCard({ product }: { product: Product }) {
           📊 {product.source}
         </p>
 
-        {/* CTA */}
-        <a
-          href={product.affiliateUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center space-x-2 w-full bg-primary hover:bg-primary-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors"
-        >
-          <ShoppingCart className="w-4 h-4" />
-          <span>View Deal</span>
-          <ExternalLink className="w-3 h-3 opacity-70" />
-        </a>
+        {/* CTA Buttons */}
+        <div className="flex gap-2">
+          <Link
+            href={`/product/${product.id}`}
+            className="flex-1 flex items-center justify-center space-x-1 border-2 border-primary text-primary font-semibold py-2.5 px-3 rounded-lg hover:bg-primary hover:text-white transition-all text-sm"
+          >
+            <Info className="w-3.5 h-3.5" />
+            <span>Details</span>
+          </Link>
+          <a
+            href={product.affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 flex items-center justify-center space-x-1 bg-primary hover:bg-primary-600 text-white font-semibold py-2.5 px-3 rounded-lg transition-colors text-sm"
+          >
+            <ShoppingCart className="w-3.5 h-3.5" />
+            <span>Buy</span>
+            <ExternalLink className="w-3 h-3 opacity-70" />
+          </a>
+        </div>
       </div>
     </div>
   )

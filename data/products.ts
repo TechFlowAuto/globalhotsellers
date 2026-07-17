@@ -141,6 +141,22 @@ export const featuredProducts: Product[] = [
     affiliateUrl: 'https://amazon.com/dp/example8',
     source: 'Amazon Best Sellers',
   },
+  {
+    id: '9',
+    title: 'WHOOP One — 12-Month Membership',
+    description: '24/7 fitness & health wearable with sleep, strain & recovery tracking. Includes certified pre-owned WHOOP 5.0 device, 14+ day battery, personalized coaching, VO2 Max, heart rate zones, and women\'s hormonal insights. HSA/FSA eligible.',
+    price: '$199.00',
+    originalPrice: '$239.00',
+    currency: 'USD',
+    imageUrl: 'https://m.media-amazon.com/images/I/61TTqZv25uL._AC_SX679_.jpg',
+    platform: 'Amazon',
+    category: 'Electronics',
+    rating: 4.3,
+    reviewCount: 892,
+    badge: 'trending',
+    affiliateUrl: 'https://amazon.com/dp/B0DY2VVZWZ',
+    source: 'Amazon — WHOOP + 12-Month Membership Bundle',
+  },
 ];
 
 export const platforms = [
