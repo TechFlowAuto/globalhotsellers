@@ -246,12 +246,15 @@ def main():
         rest = rest[:MAX_PRODUCTS - len(fixed)]
     final = fixed + rest
 
-    # 更新 products.ts
+    # 更新 products.ts: 只替换 featuredProducts 数组, 保留 platforms/categories 等其他导出
     ts = open(DATA_FILE).read()
-    header = ts[:ts.index('export const featuredProducts')]
-    new_ts = (header +
-              'export const featuredProducts: Product[] = [\n' +
-              serialize(final) + '\n]\n')
+    new_ts, n = re.subn(
+        r'export const featuredProducts: Product\[\] = \[.*?\];?\s*$',
+        'export const featuredProducts: Product[] = [\n' + serialize(final) + '\n]',
+        ts, count=1, flags=re.S)
+    if n == 0:
+        print('⚠️ 未找到 featuredProducts 数组，中止写入')
+        return 1
     if not DRY:
         open(DATA_FILE, 'w').write(new_ts)
     print(f'\n📊 本次新增 {len(new_products)} 个商品, 总计 {len(final)} 个')
