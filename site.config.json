@@ -16,5 +16,6 @@
     "pet-supplies",
     "health-personal-care"
   ],
-  "maxProducts": 60
+  "maxProducts": 60,
+  "fixedProductIds": ["B0DY2VVZWZ"]
 }

@@ -277,14 +277,15 @@ def main():
     new_products = []
     today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
-    # === eBay Daily Deals ===
-    print('\n=== eBay Daily Deals ===')
-    ebay_items = [p for p in fetch_ebay_deals() if p['id'] not in existing_map]
-    if ebay_items:
-        print(f'  eBay 新增 {len(ebay_items)} 个')
-        new_products += ebay_items
-    else:
-        print('  eBay 无新增 (已存在或抓取失败)')
+    # === eBay Daily Deals (按配置启用) ===
+    if 'ebay' in SITE_CFG.get('platforms', ['amazon', 'ebay']):
+        print('\n=== eBay Daily Deals ===')
+        ebay_items = [p for p in fetch_ebay_deals() if p['id'] not in existing_map]
+        if ebay_items:
+            print(f'  eBay 新增 {len(ebay_items)} 个')
+            new_products += ebay_items
+        else:
+            print('  eBay 无新增 (已存在或抓取失败)')
 
     # === Amazon Best Sellers ===
     for cat_key, cat_name in CATEGORIES:
@@ -340,7 +341,7 @@ def main():
     # 合并: 现有(WHOOP等固定商品) + 新增，上限 MAX_PRODUCTS
     merged = existing + new_products
     # 固定商品(有丰富详情的)优先保留; 超出上限时优先保留已有, 丢弃新增尾部
-    fixed_ids = {'B0DY2VVZWZ'}  # WHOOP 等有详情页的固定商品
+    fixed_ids = set(SITE_CFG.get('fixedProductIds', []))  # 主站: ['B0DY2VVZWZ']
     fixed = [p for p in merged if p['id'] in fixed_ids]
     rest = [p for p in merged if p['id'] not in fixed_ids]
     if len(rest) > MAX_PRODUCTS - len(fixed):
@@ -351,7 +352,7 @@ def main():
     ts = open(DATA_FILE).read()
     # 用贪婪匹配到下一个 export const 或文件末尾 (数组内部不会出现 \nexport const)
     m = re.search(
-        r'(export const featuredProducts: Product\[\] = \[).*(\])(?=\nexport const|\Z)',
+        r'(export const featuredProducts: Product\[\] = \[).*(\])(?=\n\s*export const|\s*\Z)',
         ts, flags=re.S)
     if not m:
         print('⚠️ 未找到 featuredProducts 数组，中止写入')
@@ -361,8 +362,8 @@ def main():
         open(DATA_FILE, 'w').write(new_ts)
     print(f'\n📊 本次新增 {len(new_products)} 个商品, 总计 {len(final)} 个')
 
-    # git 提交
-    if not DRY:
+    # git 提交 (配置 gitPush=true 时; 用 Vercel CLI 部署的站点跳过)
+    if not DRY and SITE_CFG.get('gitPush', True):
         subprocess.run(['git', '-C', ROOT, 'add', '-A'], check=False)
         subprocess.run(['git', '-C', ROOT, 'commit', '-m',
                         f'每日热卖更新: +{len(new_products)} 商品 ({today})'],

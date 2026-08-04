@@ -1,0 +1,13 @@
+{
+  "siteId": "pethotsellers",
+  "name": "PetHotSellers",
+  "tagline": "Top Pet Products Trending Now",
+  "domain": "https://pethotsellers.vercel.app",
+  "amazonTag": "globalhotsell-20",
+  "logoEmoji": "🐾",
+  "platforms": ["amazon"],
+  "amazonCategories": [
+    "pet-supplies"
+  ],
+  "maxProducts": 40
+}
