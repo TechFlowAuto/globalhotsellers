@@ -51,7 +51,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   // Product structured data (JSON-LD) for rich results
   const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ''))
-  const jsonLd = {
+  const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
@@ -61,12 +61,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     brand: {
       '@type': 'Brand',
       name: product.source,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-      bestRating: 5,
     },
     offers: {
       '@type': 'Offer',
@@ -79,6 +73,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         name: product.platform,
       },
     },
+  }
+  if (product.rating > 0) {
+    jsonLd.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: product.rating,
+      reviewCount: product.reviewCount,
+      bestRating: 5,
+    }
   }
 
   return (

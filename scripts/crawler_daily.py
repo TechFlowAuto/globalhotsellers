@@ -40,6 +40,24 @@ DRY = '--dry-run' in sys.argv
 if '--limit' in sys.argv:
     PER_CATEGORY = int(sys.argv[sys.argv.index('--limit') + 1])
 
+# 汇率缓存 (USD/CNY)
+FX_RATE = 6.8  # 兜底值
+
+def get_fx_rate():
+    """获取 USD->CNY 汇率, 失败用兜底"""
+    global FX_RATE
+    try:
+        r = subprocess.run(
+            ['curl', '-s', '--max-time', '10', 'https://open.er-api.com/v6/latest/USD'],
+            capture_output=True, text=True)
+        d = json.loads(r.stdout)
+        if d.get('result') == 'success' and d['rates'].get('CNY'):
+            FX_RATE = d['rates']['CNY']
+            print(f'💱 汇率 USD/CNY = {FX_RATE:.4f}')
+    except Exception as e:
+        print(f'⚠️ 汇率获取失败, 用兜底 {FX_RATE}: {e}')
+    return FX_RATE
+
 
 def fetch(url, out_file):
     subprocess.run(
@@ -99,6 +117,80 @@ def get_hires_image(asin):
             pass
     m2 = re.search(r'"hiRes":"(https://m\.media-amazon\.com/images/I/[^"]+)"', html)
     return m2.group(1) if m2 else None
+
+
+def parse_ebay_deals(html):
+    """从 eBay Daily Deals 页解析商品 (CNY价格)"""
+    items = []
+    blocks = re.split(r'(?=data-listing-id=\d+)', html)
+    seen = set()
+    for blk in blocks:
+        m = re.search(r'data-listing-id=(\d+)', blk)
+        if not m:
+            continue
+        lid = m.group(1)
+        if lid in seen:
+            continue
+        seen.add(lid)
+        title_m = re.search(r'itemprop=name class=ebayui-ellipsis-[23]>([^<]{5,160})<', blk)
+        title = title_m.group(1).strip() if title_m else ''
+        price_m = re.search(r'itemprop=price class=first>([\d.]+)元', blk)
+        price = float(price_m.group(1)) if price_m else None
+        orig_m = re.search(r'itemtile-price-strikethrough>([\d.]+)元', blk)
+        orig = float(orig_m.group(1)) if orig_m else None
+        img_m = re.search(r'<img src=(https://i\.ebayimg\.com/images/g/[A-Za-z0-9]+/s-l\d+[^"\s]*)', blk)
+        img = img_m.group(1) if img_m else ''
+        # 过滤非英文标题(含中文/德文等)和缺少图片/价格的
+        if not title or not price or not img:
+            continue
+        if not re.match(r'^[\x00-\x7F ]+$', title):
+            continue
+        # 换大图
+        img = re.sub(r'/s-l\d+', '/s-l1600', img)
+        items.append({
+            'id': lid, 'title': title, 'price_cny': price,
+            'original_cny': orig, 'image': img,
+        })
+    return items
+
+
+def fetch_ebay_deals():
+    """抓取 eBay Daily Deals, 返回统一格式商品列表"""
+    page = '/tmp/amz_ebay_deals.html'
+    if not fetch('https://www.ebay.com/deals?_dmd=1', page):
+        print('  ❌ eBay 抓取失败')
+        return []
+    raw = parse_ebay_deals(open(page, errors='ignore').read())[:PER_CATEGORY]
+    fx = get_fx_rate()
+    products = []
+    for it in raw:
+        usd = it['price_cny'] / fx
+        orig_usd = (it['original_cny'] / fx) if it['original_cny'] else None
+        img_path = download_image(it['image'], it['id'])
+        if not img_path:
+            print(f'  ⚠️ {it["id"]} 图片下载失败, 跳过')
+            continue
+        description = (f'{it["title"]} — eBay Daily Deal with discount pricing. '
+                       f'Popular item trending on eBay right now.')
+        products.append({
+            'id': it['id'],
+            'title': it['title'],
+            'description': description,
+            'price': f'${usd:.2f}',
+            'originalPrice': f'${orig_usd:.2f}' if orig_usd else '',
+            'currency': 'USD',
+            'imageUrl': img_path,
+            'platform': 'eBay',
+            'category': 'Deals',
+            'rating': 0,
+            'reviewCount': 0,
+            'badge': 'hot',
+            'affiliateUrl': f'https://www.ebay.com/itm/{it["id"]}',
+            'source': f'eBay Daily Deal ({datetime.now(timezone.utc).strftime("%Y-%m-%d")})',
+        })
+        print(f'  ✅ {it["id"]} ${usd:.2f} {it["title"][:45]}')
+        time.sleep(1)
+    return products
 
 
 def download_image(url, asin):
@@ -186,6 +278,16 @@ def main():
     new_products = []
     today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
+    # === eBay Daily Deals ===
+    print('\n=== eBay Daily Deals ===')
+    ebay_items = [p for p in fetch_ebay_deals() if p['id'] not in existing_map]
+    if ebay_items:
+        print(f'  eBay 新增 {len(ebay_items)} 个')
+        new_products += ebay_items
+    else:
+        print('  eBay 无新增 (已存在或抓取失败)')
+
+    # === Amazon Best Sellers ===
     for cat_key, cat_name in CATEGORIES:
         print(f'\n=== {cat_name} ===')
         page = f'/tmp/amz_bs_{cat_key}.html'

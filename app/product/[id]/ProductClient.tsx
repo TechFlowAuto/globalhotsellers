@@ -148,22 +148,24 @@ export default function ProductClient({ id }: ProductClientProps) {
               </h1>
 
               {/* Rating */}
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-5 h-5 ${
-                        i < Math.floor(product.rating)
-                          ? 'text-yellow-400 fill-yellow-400'
-                          : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
+              {product.rating > 0 && (
+                <div className="flex items-center space-x-2 mb-6">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < Math.floor(product.rating)
+                            ? 'text-yellow-400 fill-yellow-400'
+                            : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="font-bold text-gray-900">{product.rating}</span>
+                  <span className="text-gray-500">({product.reviewCount.toLocaleString()} reviews)</span>
                 </div>
-                <span className="font-bold text-gray-900">{product.rating}</span>
-                <span className="text-gray-500">({product.reviewCount.toLocaleString()} reviews)</span>
-              </div>
+              )}
 
               {/* Price */}
               <div className="flex items-baseline space-x-3 mb-6">

@@ -74,23 +74,25 @@ export default function ProductCard({ product }: { product: Product }) {
         </Link>
         
         {/* Rating */}
-        <div className="flex items-center space-x-1 mb-2">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-3.5 h-3.5 ${
-                  i < Math.floor(product.rating)
-                    ? 'text-yellow-400 fill-yellow-400'
-                    : 'text-gray-300'
-                }`}
-              />
-            ))}
+        {product.rating > 0 && (
+          <div className="flex items-center space-x-1 mb-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-3.5 h-3.5 ${
+                    i < Math.floor(product.rating)
+                      ? 'text-yellow-400 fill-yellow-400'
+                      : 'text-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-500">
+              ({product.reviewCount.toLocaleString()})
+            </span>
           </div>
-          <span className="text-xs text-gray-500">
-            ({product.reviewCount.toLocaleString()})
-          </span>
-        </div>
+        )}
 
         {/* Price */}
         <div className="flex items-center space-x-2 mb-3">
