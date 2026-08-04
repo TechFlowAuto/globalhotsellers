@@ -350,13 +350,14 @@ def main():
 
     # 更新 products.ts: 只替换 featuredProducts 数组, 保留 platforms/categories 等其他导出
     ts = open(DATA_FILE).read()
-    new_ts, n = re.subn(
-        r'export const featuredProducts: Product\[\] = \[.*?\];?\s*$',
-        'export const featuredProducts: Product[] = [\n' + serialize(final) + '\n]',
-        ts, count=1, flags=re.S)
-    if n == 0:
+    # 用贪婪匹配到下一个 export const 或文件末尾 (数组内部不会出现 \nexport const)
+    m = re.search(
+        r'(export const featuredProducts: Product\[\] = \[).*(\])(?=\nexport const|\Z)',
+        ts, flags=re.S)
+    if not m:
         print('⚠️ 未找到 featuredProducts 数组，中止写入')
         return 1
+    new_ts = ts[:m.start()] + m.group(1) + '\n' + serialize(final) + '\n' + m.group(2) + ts[m.end():]
     if not DRY:
         open(DATA_FILE, 'w').write(new_ts)
     print(f'\n📊 本次新增 {len(new_products)} 个商品, 总计 {len(final)} 个')

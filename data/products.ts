@@ -666,3 +666,19 @@ export const featuredProducts: Product[] = [
     source: 'eBay Daily Deal (2026-08-04)',
   },
 ]
+export const platforms = [
+  { name: 'Amazon', color: '#FF9900', bg: 'bg-orange-50', textColor: 'text-orange-600' },
+  { name: 'eBay', color: '#0064D2', bg: 'bg-blue-50', textColor: 'text-blue-600' },
+  { name: 'AliExpress', color: '#E62E04', bg: 'bg-red-50', textColor: 'text-red-600' },
+  { name: 'Walmart', color: '#0071CE', bg: 'bg-blue-50', textColor: 'text-blue-700' },
+  { name: 'Etsy', color: '#F56400', bg: 'bg-orange-50', textColor: 'text-orange-600' },
+];
+
+export const categories = [
+  { name: 'Electronics', count: 156, icon: '⚡' },
+  { name: 'Home & Kitchen', count: 234, icon: '🏠' },
+  { name: 'Fashion', count: 189, icon: '👕' },
+  { name: 'Sports & Outdoors', count: 98, icon: '🏃' },
+  { name: 'Beauty', count: 145, icon: '💄' },
+  { name: 'Toys & Games', count: 67, icon: '🎮' },
+];
