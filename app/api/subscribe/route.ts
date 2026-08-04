@@ -1,4 +1,27 @@
-import { kv } from '@vercel/kv';
+import { put, get } from '@vercel/blob';
+
+const BLOB_URL =
+  'https://lwmkx78togjax57b.private.blob.vercel-storage.com/subscribers.json';
+
+async function readSubscribers(): Promise<any[]> {
+  try {
+    const g = await get(BLOB_URL, { access: 'private', useCache: false });
+    if (!g) return [];
+    const text = await new Response(g.stream).text();
+    return text ? JSON.parse(text) : [];
+  } catch {
+    return [];
+  }
+}
+
+async function writeSubscribers(list: any[]) {
+  await put('subscribers.json', JSON.stringify(list), {
+    access: 'private',
+    addRandomSuffix: false,
+    contentType: 'application/json',
+    allowOverwrite: true,
+  });
+}
 
 export async function POST(request: Request) {
   try {
@@ -13,7 +36,7 @@ export async function POST(request: Request) {
     }
 
     // Check if already subscribed
-    const subscribers = await kv.get<any[]>('subscribers') || [];
+    const subscribers = await readSubscribers();
     const exists = subscribers.find(
       (s: any) => s.email?.toLowerCase() === email.toLowerCase()
     );
@@ -37,7 +60,7 @@ export async function POST(request: Request) {
     };
 
     subscribers.push(subscriber);
-    await kv.set('subscribers', subscribers);
+    await writeSubscribers(subscribers);
 
     return Response.json(
       {

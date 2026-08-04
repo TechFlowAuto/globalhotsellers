@@ -1,4 +1,7 @@
-import { kv } from '@vercel/kv';
+import { get } from '@vercel/blob';
+
+const BLOB_URL =
+  'https://lwmkx78togjax57b.private.blob.vercel-storage.com/subscribers.json';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,7 +11,16 @@ export async function GET(request: Request) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const subscribers = await kv.get<any[]>('subscribers') || [];
+  let subscribers: any[] = [];
+  try {
+    const g = await get(BLOB_URL, { access: 'private', useCache: false });
+    if (g) {
+      const text = await new Response(g.stream).text();
+      subscribers = text ? JSON.parse(text) : [];
+    }
+  } catch {
+    subscribers = [];
+  }
 
   return Response.json({
     total: subscribers.length,
