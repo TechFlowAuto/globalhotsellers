@@ -5,29 +5,35 @@ import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { siteConfig } from '@/site.config'
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 const inter = Inter({ subsets: ['latin'] })
 
+const SITE_NAME = siteConfig.name
 export const metadata: Metadata = {
-  title: 'GlobalHotSellers - Discover What\'s Hot Worldwide',
-  description: 'Find the hottest selling products from Amazon, eBay, AliExpress, Walmart and more. Global trends, local deals.',
-  keywords: 'hot products, best sellers, trending items, amazon deals, ebay trending, global shopping',
+  title: {
+    default: `${SITE_NAME} - ${siteConfig.tagline}`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: siteConfig.tagline,
+  keywords: 'hot products, best sellers, trending items, deals, global shopping',
   openGraph: {
-    title: 'GlobalHotSellers - Discover What\'s Hot Worldwide',
-    description: 'Find the hottest selling products from global marketplaces',
+    title: `${SITE_NAME} - ${siteConfig.tagline}`,
+    description: siteConfig.tagline,
     type: 'website',
     locale: 'en_US',
-    url: 'https://globalhotsellers.net',
-    siteName: 'GlobalHotSellers',
+    url: siteConfig.domain,
+    siteName: SITE_NAME,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GlobalHotSellers - Discover What\'s Hot Worldwide',
-    description: 'Find the hottest selling products from global marketplaces',
+    title: `${SITE_NAME} - ${siteConfig.tagline}`,
+    description: siteConfig.tagline,
     creator: '@GlobalHotSellers',
   },
+  metadataBase: new URL(siteConfig.domain),
 }
 
 export default function RootLayout({

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Menu, X, Globe, Search, Flame } from 'lucide-react'
+import { siteConfig } from '@/site.config'
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -23,11 +24,11 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-lg">
-              <Globe className="w-6 h-6 text-white" />
+              <span className="text-xl">{siteConfig.logoEmoji}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-900">GlobalHotSellers</span>
-              <span className="text-xs text-gray-500">Discover What's Hot Worldwide</span>
+              <span className="text-xl font-bold text-gray-900">{siteConfig.name}</span>
+              <span className="text-xs text-gray-500">{siteConfig.tagline}</span>
             </div>
           </div>
 

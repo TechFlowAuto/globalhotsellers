@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { featuredProducts } from '@/data/products'
+import { siteConfig } from '@/site.config'
 
-const BASE_URL = 'https://globalhotsellers.net'
+const BASE_URL = siteConfig.domain
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

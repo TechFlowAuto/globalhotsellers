@@ -1,4 +1,5 @@
 import EmailSubscribe from './EmailSubscribe'
+import { siteConfig } from '@/site.config'
 
 export default function Footer() {
   return (
@@ -16,8 +17,8 @@ export default function Footer() {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-2xl font-bold">GlobalHotSellers</h3>
-              <p className="text-gray-400 mt-2">Discover What's Hot Worldwide</p>
+              <h3 className="text-2xl font-bold">{siteConfig.name}</h3>
+              <p className="text-gray-400 mt-2">{siteConfig.tagline}</p>
             </div>
             
             <div className="text-center md:text-right">

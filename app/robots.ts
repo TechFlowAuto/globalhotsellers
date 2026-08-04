@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next'
 
 const BASE_URL = 'https://globalhotsellers.net'
-
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [

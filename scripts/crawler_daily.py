@@ -18,23 +18,22 @@ from datetime import datetime, timezone
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_DIR = f'{ROOT}/public/images/products'
 DATA_FILE = f'{ROOT}/data/products.ts'
-TAG = 'globalhotsell-20'
-BASE_URL = 'https://globalhotsellers.net'
-MAX_PRODUCTS = 60          # 商品总量上限
+
+# 读取站点配置 (支持多站点部署: 宠物站/健身站/美妆站共用一套代码)
+with open(f'{ROOT}/site.config.json') as f:
+    SITE_CFG = json.load(f)
+TAG = SITE_CFG.get('amazonTag', 'globalhotsell-20')
+BASE_URL = SITE_CFG.get('domain', 'https://globalhotsellers.net')
+MAX_PRODUCTS = SITE_CFG.get('maxProducts', 60)   # 商品总量上限
 PER_CATEGORY = 6           # 每品类抓取数量
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36'
 COOKIE = 'i18n-prefs=USD;lc-main=en_US'
 
-CATEGORIES = [
-    ('electronics', 'Electronics'),
-    ('home-kitchen', 'Home & Kitchen'),
-    ('beauty', 'Beauty'),
-    ('sports-outdoors', 'Sports & Outdoors'),
-    ('grocery', 'Grocery'),
-    ('toys-games', 'Toys & Games'),
-    ('pet-supplies', 'Pet Supplies'),
-    ('health-personal-care', 'Health & Personal Care'),
-]
+# 品类: 来自配置; 未配置时用默认全品类
+CATEGORIES = [(c, ' '.join(w.capitalize() for w in c.split('-')))
+              for c in SITE_CFG.get('amazonCategories', [
+                  'electronics', 'home-kitchen', 'beauty', 'sports-outdoors',
+                  'grocery', 'toys-games', 'pet-supplies', 'health-personal-care'])]
 
 DRY = '--dry-run' in sys.argv
 if '--limit' in sys.argv:

@@ -1,0 +1,20 @@
+{
+  "siteId": "globalhotsellers",
+  "name": "GlobalHotSellers",
+  "tagline": "Discover What's Hot Worldwide",
+  "domain": "https://globalhotsellers.net",
+  "amazonTag": "globalhotsell-20",
+  "logoEmoji": "🌐",
+  "platforms": ["amazon", "ebay"],
+  "amazonCategories": [
+    "electronics",
+    "home-kitchen",
+    "beauty",
+    "sports-outdoors",
+    "grocery",
+    "toys-games",
+    "pet-supplies",
+    "health-personal-care"
+  ],
+  "maxProducts": 60
+}
