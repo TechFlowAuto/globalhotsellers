@@ -19,7 +19,7 @@ interface ProductDetail {
 }
 
 const productDetails: Record<string, ProductDetail> = {
-  '9': {
+  'B0DY2VVZWZ': {
     features: [
       '24/7 heart rate monitoring with optical sensor',
       'Sleep stage tracking (light, deep, REM) with Sleep Score',
