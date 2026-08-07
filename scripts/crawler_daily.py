@@ -30,10 +30,21 @@ UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
 COOKIE = 'i18n-prefs=USD;lc-main=en_US'
 
 # 品类: 来自配置; 未配置时用默认全品类
-CATEGORIES = [(c, ' '.join(w.capitalize() for w in c.split('-')))
-              for c in SITE_CFG.get('amazonCategories', [
-                  'electronics', 'home-kitchen', 'beauty', 'sports-outdoors',
-                  'grocery', 'toys-games', 'pet-supplies', 'health-personal-care'])]
+# 支持子类目格式: 'parent-slug/nodeID:Display Name' 或 'slug:Display Name'
+def _parse_categories(cats):
+    parsed = []
+    for c in cats:
+        if ':' in c:
+            key, name = c.split(':', 1)
+        else:
+            key = c
+            name = ' '.join(w.capitalize() for w in c.split('/')[0].split('-'))
+        parsed.append((key.strip(), name.strip()))
+    return parsed
+
+CATEGORIES = _parse_categories(SITE_CFG.get('amazonCategories', [
+    'electronics', 'home-kitchen', 'beauty', 'sports-outdoors',
+    'grocery', 'toys-games', 'pet-supplies', 'health-personal-care']))
 
 DRY = '--dry-run' in sys.argv
 if '--limit' in sys.argv:
@@ -290,7 +301,8 @@ def main():
     # === Amazon Best Sellers ===
     for cat_key, cat_name in CATEGORIES:
         print(f'\n=== {cat_name} ===')
-        page = f'/tmp/amz_bs_{cat_key}.html'
+        safe_key = cat_key.replace('/', '_')  # 子类目含 /, 用于文件名
+        page = f'/tmp/amz_bs_{safe_key}.html'
         if not fetch(f'https://www.amazon.com/gp/bestsellers/{cat_key}', page):
             print(f'  ❌ 抓取失败，跳过')
             continue
