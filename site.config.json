@@ -8,14 +8,14 @@
   "platforms": ["amazon", "ebay"],
   "amazonCategories": [
     "electronics",
-    "home-kitchen",
-    "beauty",
-    "sports-outdoors",
+    "home-kitchen/1055398:Home & Kitchen",
+    "beauty/3760911:Beauty",
+    "sports-outdoors/3407731:Exercise & Fitness",
     "grocery",
-    "toys-games",
-    "pet-supplies",
-    "health-personal-care"
+    "toys-games/165793011:Toys & Games",
+    "health-personal-care/3760901:Health & Household",
+    "pet-supplies/2975312011:Dog Supplies"
   ],
-  "maxProducts": 60,
+  "maxProducts": 80,
   "fixedProductIds": ["B0DY2VVZWZ"]
 }

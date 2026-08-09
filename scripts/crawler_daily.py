@@ -286,6 +286,7 @@ def main():
     print(f'现有商品: {len(existing)} 个')
 
     new_products = []
+    updates = 0
     today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
 
     # === eBay Daily Deals (按配置启用) ===
@@ -311,7 +312,17 @@ def main():
         for it in items:
             asin = it['asin']
             if asin in existing_map:
-                print(f'  ⏭ {asin} 已存在，跳过')
+                # 刷新已有商品的价格/评分（不重下图片，保留其他字段）
+                old = existing_map[asin]
+                new_price = f'${it["price"]:.2f}'
+                new_rating = it['rating'] or 4.0
+                if old['price'] != new_price or abs(old['rating'] - new_rating) > 0.01:
+                    old['price'] = new_price
+                    old['rating'] = new_rating
+                    updates += 1
+                    print(f'  🔄 {asin} 价格/评分已刷新: {new_price} ★{new_rating}')
+                else:
+                    print(f'  ⏭ {asin} 已存在且价格未变，跳过')
                 continue
             print(f'  🔍 {asin} {it["title"][:45]}... ${it["price"]:.2f}')
             hires = get_hires_image(asin)
@@ -346,9 +357,14 @@ def main():
             print(f'    ✅ 已收录')
             time.sleep(1.5)  # 限速防封
 
-    if not new_products:
-        print('\n无新增商品')
+    if not new_products and updates == 0:
+        print('\n无新增/无变化商品')
         return 0
+
+    if new_products:
+        print(f'\n📊 新增 {len(new_products)} 个商品; 刷新 {updates} 个; 总计 {len(existing) + len(new_products)} 个')
+    else:
+        print(f'\n📊 无新增; 刷新 {updates} 个商品')
 
     # 合并: 现有(WHOOP等固定商品) + 新增，上限 MAX_PRODUCTS
     merged = existing + new_products
