@@ -1,7 +1,9 @@
+import Link from 'next/link'
 import HeroSection from '@/components/HeroSection'
 import ProductCard from '@/components/ProductCard'
 import EmailSubscribe from '@/components/EmailSubscribe'
 import { featuredProducts, platforms, categories } from '@/data/products'
+import { articles } from '@/data/articles'
 import { TrendingUp, Star, Globe, Zap, ChevronRight } from 'lucide-react'
 
 export default function Home() {
@@ -128,6 +130,57 @@ export default function Home() {
                 Get the best deals with zero effort. Save time and money shopping smart.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ Buying Guides Section ═══ */}
+      <section className="py-16 bg-white border-t">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 rounded-full px-4 py-1.5 text-sm font-semibold mb-3">
+                <span>📚</span>
+                <span>Buying Guides</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                Data-Backed Buying Guides
+              </h2>
+              <p className="text-lg text-gray-600 mt-2">
+                What real shoppers are buying right now — researched from live best-seller data.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="hidden md:flex items-center space-x-1 text-primary font-semibold hover:text-primary-600 transition-colors"
+            >
+              <span>All guides</span>
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {articles.map((article) => (
+              <Link
+                key={article.slug}
+                href={`/blog/${article.slug}`}
+                className="group bg-gray-50 rounded-2xl border border-gray-200 p-6 hover:shadow-lg hover:border-primary/30 transition-all"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-3xl">{article.emoji}</span>
+                  <span className="text-xs text-gray-400">{article.readTime}</span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
+                  {article.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                  {article.description}
+                </p>
+                <span className="text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform inline-block">
+                  Read guide →
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
