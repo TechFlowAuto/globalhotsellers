@@ -25,7 +25,7 @@ with open(f'{ROOT}/site.config.json') as f:
 TAG = SITE_CFG.get('amazonTag', 'globalhotsell-20')
 BASE_URL = SITE_CFG.get('domain', 'https://globalhotsellers.net')
 MAX_PRODUCTS = SITE_CFG.get('maxProducts', 60)   # 商品总量上限
-PER_CATEGORY = 6           # 每品类抓取数量
+PER_CATEGORY = 10          # 每品类抓取数量 (2026-08-15 从 6 提升，聚焦双站扩容)
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36'
 COOKIE = 'i18n-prefs=USD;lc-main=en_US'
 
