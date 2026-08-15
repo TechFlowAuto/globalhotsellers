@@ -584,3 +584,37 @@
 
 📊 本次新增 1 个商品, 总计 86 个
 🚀 已推送 GitHub, Vercel 自动部署中
+现有商品: 86 个
+
+=== eBay Daily Deals ===
+  ❌ eBay 抓取失败
+  eBay 无新增 (已存在或抓取失败)
+
+=== Electronics ===
+  ❌ 抓取失败，跳过
+
+=== Home & Kitchen ===
+  ❌ 抓取失败，跳过
+
+=== Beauty ===
+  ❌ 抓取失败，跳过
+
+=== Exercise & Fitness ===
+  ❌ 抓取失败，跳过
+
+=== Grocery ===
+  ❌ 抓取失败，跳过
+
+=== Toys & Games ===
+  ❌ 抓取失败，跳过
+
+=== Vitamins & Supplements ===
+  ❌ 抓取失败，跳过
+
+=== Wellness & Relaxation ===
+  ❌ 抓取失败，跳过
+
+=== Dog Supplies ===
+  ❌ 抓取失败，跳过
+
+无新增/无变化商品
