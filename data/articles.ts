@@ -89,6 +89,54 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  {
+    slug: 'best-beauty-20260817',
+    title: 'Top Beauty People Are Actually Buying (August 2026)',
+    description:
+      'We pull live Amazon best-seller data every day. Here are the Beauty products real shoppers are buying right now — with honest buying guidance and current prices.',
+    keywords: [
+      'best beauty 2026',
+      'top beauty',
+      'amazon best sellers',
+      'maybelline lash sensational high',
+      'nizoral anti dandruff shampoo',
+    ],
+    date: '2026-08-17',
+    readTime: '7 min read',
+    category: 'Beauty',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'Why These Picks Keep Topping the Charts',
+        body: 'Every morning we refresh this list from live Amazon best-seller rankings, so what you see here reflects what real shoppers are buying right now — not paid placements. For August 2026, these Beauty picks keep coming back, and each one below is in our catalog today with a current price and rating.',
+      },
+      {
+        heading: '1. Maybelline Lash Sensational Sky High Washable Mascara…',
+        body: 'This is one of the most-purchased Beauty items in our daily Amazon data. It is currently listed at $14.85 with a 4.5-star average across 187,065 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B08H3JPH74'],
+      },
+      {
+        heading: '2. Nizoral Anti-Dandruff Shampoo with 1% Ketoconazole, Fresh…',
+        body: 'This is one of the most-purchased Beauty items in our daily Amazon data. It is currently listed at $16.88 with a 4.6-star average across 120,983 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00AINMFAC'],
+      },
+      {
+        heading: '3. Mrs. Meyer\'s Clean Day, Hand Soap Refill, Lemon Verbena…',
+        body: 'This is one of the most-purchased Beauty items in our daily Amazon data. It is currently listed at $7.49 with a 4.7-star average across 94,939 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00F1U0YB4'],
+      },
+      {
+        heading: '4. PanOxyl 10% Benzoyl Peroxide Acne Foaming Wash, Maximum…',
+        body: 'This is one of the most-purchased Beauty items in our daily Amazon data. It is currently listed at $10.12 with a 4.6-star average across 82,423 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B081KL2QYJ'],
+      },
+      {
+        heading: 'How to Choose the Right One',
+        body: 'How to pick the right Beauty product: compare ratings above 4 stars and review counts in the hundreds or more, check the most recent reviews for quality complaints, and watch the price — Amazon prices move daily and our links always show the live price. When in doubt, buy from a brand with a long track record and a solid return policy. Prices and availability were accurate when this guide was published (2026-08-17) and may change.',
+      },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
