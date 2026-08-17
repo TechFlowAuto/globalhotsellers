@@ -23,6 +23,35 @@ DATA_DIR = os.path.join(SITE, 'data')
 PRODUCTS_PATH = os.path.join(DATA_DIR, 'products.ts')
 ARTICLES_PATH = os.path.join(DATA_DIR, 'articles.ts')
 STATE_PATH = os.path.join(DATA_DIR, '.last_article.json')
+KEYWORDS_PATH = os.path.join(DATA_DIR, 'keywords.json')
+
+# 品类特征词: 关键词 → 品类匹配 (长尾词定位到有商品的品类)
+CATEGORY_KEYWORDS = {
+    'Dog Supplies': ['dog', 'puppy', 'canine', 'leash', 'chew', 'german shepherd', 'golden retriever'],
+    'Cat Supplies': ['cat', 'kitten', 'litter', 'feline'],
+    'Reptile Supplies': ['reptile', 'gecko', 'terrarium', 'snake', 'lizard', 'turtle', 'aquarium', 'fish tank', 'fish'],
+    'Vitamins & Supplements': ['vitamin', 'supplement', 'collagen', 'omega', 'creatine', 'probiotic', 'mineral', 'multivitamin', 'zinc', 'magnesium'],
+    'Wellness & Relaxation': ['massage', 'essential oil', 'diffuser', 'relax', 'aromatherapy', 'spa', 'anxiety', 'sleep'],
+    'Beauty': ['mascara', 'shampoo', 'skincare', 'makeup', 'hair', 'beauty', 'conditioner', 'fragrance', 'lotion', 'serum'],
+    'Electronics': ['headphone', 'speaker', 'charger', 'phone', 'tablet', 'laptop', 'camera', 'watch', 'earbud', 'tv', 'monitor'],
+    'Home & Kitchen': ['air fryer', 'vacuum', 'kitchen', 'pillow', 'cookware', 'blender', 'toaster', 'coffee maker', 'knife'],
+    'Exercise & Fitness': ['fitness', 'yoga', 'dumbbell', 'resistance', 'gym', 'treadmill', 'workout', 'exercise', 'kettlebell'],
+    'Toys & Games': ['toy', 'game', 'lego', 'puzzle', 'doll', 'action figure', 'kids'],
+    'Grocery': ['snack', 'coffee', 'tea', 'protein bar', 'granola', 'cereal', 'chips'],
+}
+
+
+def match_keyword_to_category(kw, products):
+    """关键词 → 品类: 特征词命中分最高的品类, 且该品类在商品池中"""
+    cats_with_products = {p['category'] for p in products}
+    best_cat, best_score = None, 0
+    for cat, words in CATEGORY_KEYWORDS.items():
+        if cat not in cats_with_products:
+            continue
+        score = sum(1 for w in words if w in kw)
+        if score > best_score:
+            best_cat, best_score = cat, score
+    return best_cat if best_cat else None
 
 # ---------- 商品解析 ----------
 
@@ -86,7 +115,7 @@ def js_str(s):
     """JS 单引号字符串转义"""
     return s.replace('\\', '\\\\').replace("'", "\\'")
 
-def make_article(products, category, date, existing_slugs):
+def make_article(products, category, date, existing_slugs, keyword=None):
     cats = [p for p in products if p['category'] == category]
     cats = sorted(cats, key=lambda p: -(p.get('reviewCount') or 0))[:4]
     if not cats:
@@ -96,42 +125,67 @@ def make_article(products, category, date, existing_slugs):
     month_year = f"{MONTHS[date.month - 1]} {date.year}"
     day_key = date.strftime('%Y%m%d')
 
-    # 标题模板轮换
-    title_variants = [
-        f'Best {category} on Amazon Right Now ({month_year})',
-        f'Top {category} People Are Actually Buying ({month_year})',
-        f'{category}: The Picks Worth Your Money ({month_year})',
-    ]
-    title = title_variants[int(hashlib.md5(day_key.encode()).hexdigest(), 16) % len(title_variants)]
+    if keyword:
+        # 关键词驱动: 标题直接用长尾词, 去掉尾部的平台/地区/评价词
+        title = keyword.title()
+        title = re.sub(r'\s+(Amazon|Reviews?|Online|Uk|Nz|Usa|Canada|Australia|Philippines|India|Cheap|Sale)$', '', title, flags=re.I)
+        title = re.sub(r'\s+(Amazon|Reviews?|Online)$', '', title, flags=re.I)
+        title = title.strip()
+        if not re.search(r'\b(20\d\d)\b', title):
+            title = f'{title} ({month_year})'
+        slug_base = re.sub(r'[^a-z0-9]+', '-', keyword.lower()).strip('-') + '-' + day_key
+    else:
+        title_variants = [
+            f'Best {category} on Amazon Right Now ({month_year})',
+            f'Top {category} People Are Actually Buying ({month_year})',
+            f'{category}: The Picks Worth Your Money ({month_year})',
+        ]
+        title = title_variants[int(hashlib.md5(day_key.encode()).hexdigest(), 16) % len(title_variants)]
+        slug_base = 'best-' + re.sub(r'[^a-z0-9]+', '-', category.lower()).strip('-') + '-' + day_key
 
-    slug_base = 'best-' + re.sub(r'[^a-z0-9]+', '-', category.lower()).strip('-') + '-' + day_key
     slug = slug_base
     n = 2
     while slug in existing_slugs:
         slug = f'{slug_base}-{n}'
         n += 1
 
-    # 商品关键词
-    kw = [f'best {category.lower()} 2026', f'top {category.lower()}', 'amazon best sellers']
+    # 文章关键词标签
+    if keyword:
+        kw = [keyword]
+    else:
+        kw = [f'best {category.lower()} 2026', f'top {category.lower()}', 'amazon best sellers']
     for c in cats[:2]:
         words = re.findall(r'[a-z]{4,}', c['title'].lower())
         words = [w for w in words if w not in ('amazon', 'with', 'for', 'and', 'the', 'from', 'your')]
         if words:
             kw.append(' '.join(words[:4]))
 
-    first = cats[0]
-    description = (
-        f'We pull live Amazon best-seller data every day. Here are the {category} '
-        f'products real shoppers are buying right now — with honest buying guidance and current prices.'
-    )
+    if keyword:
+        description = (
+            f'Looking for {keyword}? We pull live Amazon best-seller data every day — here are the '
+            f'top picks real shoppers are buying right now, with honest buying guidance and current prices.'
+        )
+    else:
+        description = (
+            f'We pull live Amazon best-seller data every day. Here are the {category} '
+            f'products real shoppers are buying right now — with honest buying guidance and current prices.'
+        )
 
     sections = []
-    intro = (
-        f'Every morning we refresh this list from live Amazon best-seller rankings, so what you see here '
-        f'reflects what real shoppers are buying right now — not paid placements. For {month_year}, '
-        f'these {category} picks keep coming back, and each one below is in our catalog today with a '
-        f'current price and rating.'
-    )
+    if keyword:
+        intro = (
+            f'Shopping for {keyword}? This guide is built from live Amazon best-seller data we refresh '
+            f'every morning — so these are the exact products real shoppers are buying right now, not '
+            f'paid placements. For {month_year}, these {category} picks keep showing up in the rankings, '
+            f'and each one below is in our catalog today with a current price and rating.'
+        )
+    else:
+        intro = (
+            f'Every morning we refresh this list from live Amazon best-seller rankings, so what you see here '
+            f'reflects what real shoppers are buying right now — not paid placements. For {month_year}, '
+            f'these {category} picks keep coming back, and each one below is in our catalog today with a '
+            f'current price and rating.'
+        )
     sections.append({'heading': 'Why These Picks Keep Topping the Charts', 'body': intro})
 
     for i, p in enumerate(cats, 1):
@@ -194,14 +248,35 @@ def main():
     existing_slugs, insert_at = parse_existing_articles(src_a)
 
     prev = None
+    used = set()
     if os.path.exists(STATE_PATH):
         try:
-            prev = json.loads(read(STATE_PATH)).get('category')
+            st = json.loads(read(STATE_PATH))
+            prev = st.get('category')
+            used = set(st.get('used_kws', []))
         except Exception:
             prev = None
 
-    category = pick_category(products, prev)
-    slug, title, category, block = make_article(products, category, datetime.date.today(), existing_slugs)
+    # 关键词库优先: 挑未用过、分数最高、能匹配到有商品品类的长尾词
+    keyword = None
+    category = None
+    if os.path.exists(KEYWORDS_PATH):
+        try:
+            kws = json.loads(read(KEYWORDS_PATH))
+        except Exception:
+            kws = []
+        for k in kws:
+            if k['kw'] in used:
+                continue
+            cat = match_keyword_to_category(k['kw'], products)
+            if cat and sum(1 for p in products if p['category'] == cat) >= 3:
+                keyword = k['kw']
+                category = cat
+                break
+
+    if keyword is None:
+        category = pick_category(products, prev)
+    slug, title, category, block = make_article(products, category, datetime.date.today(), existing_slugs, keyword)
 
     new_src = src_a[:insert_at] + '\n' + block + src_a[insert_at:]
     with open(ARTICLES_PATH, 'w', encoding='utf-8') as f:
@@ -223,12 +298,15 @@ def main():
         raise RuntimeError(f'验证失败, 已回滚: {r.stderr[-500:]}')
     info = json.loads(r.stdout.strip().split('\n')[-1])
 
+    new_used = sorted(used | ({keyword} if keyword else set()))
     with open(STATE_PATH, 'w', encoding='utf-8') as f:
-        json.dump({'category': category, 'date': datetime.date.today().isoformat()}, f)
+        json.dump({'category': category, 'last_kw': keyword, 'used_kws': new_used, 'date': datetime.date.today().isoformat()}, f)
 
     print(f"✅ 文章已生成: {slug}")
     print(f"   title: {title}")
-    print(f"   category: {category} | 商品池 {info['count']} 篇, 最新: {info['last']}")
+    print(f"   keyword: {keyword or '(品类轮换)'} | category: {category}")
+    print(f"   关键词池已用 {len(new_used)} 个, 剩余 {max(0, len(kws or []) - len(new_used))} 个")
+    print(f"   商品池 {info['count']} 篇, 最新: {info['last']}")
 
 if __name__ == '__main__':
     main()
