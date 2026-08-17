@@ -129,6 +129,7 @@ def make_article(products, category, date, existing_slugs, keyword=None):
         # 关键词驱动: 标题直接用长尾词, 去掉尾部的平台/地区/评价词
         title = keyword.title()
         title = re.sub(r'\bBest Buy\b', 'Best', title, flags=re.I)
+        title = re.sub(r'\b20\d\d\b', str(date.year), title)
         title = re.sub(r'\s+(Amazon|Reviews?|Online|Uk|Nz|Usa|Canada|Australia|Philippines|India|Cheap|Sale)$', '', title, flags=re.I)
         title = re.sub(r'\s+(Amazon|Reviews?|Online)$', '', title, flags=re.I)
         title = title.strip()
