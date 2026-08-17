@@ -128,6 +128,7 @@ def make_article(products, category, date, existing_slugs, keyword=None):
     if keyword:
         # 关键词驱动: 标题直接用长尾词, 去掉尾部的平台/地区/评价词
         title = keyword.title()
+        title = re.sub(r'\bBest Buy\b', 'Best', title, flags=re.I)
         title = re.sub(r'\s+(Amazon|Reviews?|Online|Uk|Nz|Usa|Canada|Australia|Philippines|India|Cheap|Sale)$', '', title, flags=re.I)
         title = re.sub(r'\s+(Amazon|Reviews?|Online)$', '', title, flags=re.I)
         title = title.strip()
@@ -172,13 +173,21 @@ def make_article(products, category, date, existing_slugs, keyword=None):
         )
 
     sections = []
+    variant = int(hashlib.md5(((keyword or category) + day_key).encode()).hexdigest(), 16) % 3
     if keyword:
-        intro = (
+        intros = [
             f'Shopping for {keyword}? This guide is built from live Amazon best-seller data we refresh '
             f'every morning — so these are the exact products real shoppers are buying right now, not '
             f'paid placements. For {month_year}, these {category} picks keep showing up in the rankings, '
-            f'and each one below is in our catalog today with a current price and rating.'
-        )
+            f'and each one below is in our catalog today with a current price and rating.',
+            f'We update this guide every morning with live Amazon sales data, so these are the {category} '
+            f'products people are actually buying when they search for {keyword} — no paid placements, '
+            f'just what real shoppers choose. Here is what is trending in {month_year} and what it costs today.',
+            f'If you are searching for {keyword}, you have come to the right place. This list comes straight '
+            f'from Amazon best-seller rankings that we refresh daily — the picks below are the ones real '
+            f'buyers keep choosing in {month_year}, each with a current price and rating.',
+        ]
+        intro = intros[variant]
     else:
         intro = (
             f'Every morning we refresh this list from live Amazon best-seller rankings, so what you see here '
@@ -186,7 +195,8 @@ def make_article(products, category, date, existing_slugs, keyword=None):
             f'these {category} picks keep coming back, and each one below is in our catalog today with a '
             f'current price and rating.'
         )
-    sections.append({'heading': 'Why These Picks Keep Topping the Charts', 'body': intro})
+    intro_headings = ['Why These Picks Keep Topping the Charts', 'What Real Shoppers Are Buying Right Now', 'The Data Behind These Picks']
+    sections.append({'heading': intro_headings[variant], 'body': intro})
 
     for i, p in enumerate(cats, 1):
         rating = p.get('rating') or 0
@@ -202,14 +212,29 @@ def make_article(products, category, date, existing_slugs, keyword=None):
         )
         sections.append({'heading': heading, 'body': body, 'productIds': [p['id']]})
 
-    advice = (
-        f'How to pick the right {category} product: compare ratings above 4 stars and review counts in the '
-        f'hundreds or more, check the most recent reviews for quality complaints, and watch the price — '
-        f'Amazon prices move daily and our links always show the live price. When in doubt, buy from a '
-        f'brand with a long track record and a solid return policy. Prices and availability were accurate '
-        f'when this guide was published ({today}) and may change.'
-    )
-    sections.append({'heading': 'How to Choose the Right One', 'body': advice})
+    advices = [
+        (
+            f'How to pick the right {category} product: compare ratings above 4 stars and review counts in the '
+            f'hundreds or more, check the most recent reviews for quality complaints, and watch the price — '
+            f'Amazon prices move daily and our links always show the live price. When in doubt, buy from a '
+            f'brand with a long track record and a solid return policy. Prices and availability were accurate '
+            f'when this guide was published ({today}) and may change.'
+        ),
+        (
+            f'A quick checklist before you buy {category.lower()}: read the most recent reviews (not just the '
+            f'star rating), compare today\'s price against similar products, and check how many units the seller '
+            f'has moved this month. Products with steady sales and thousands of reviews are the safest bet. '
+            f'Prices were accurate at publication ({today}) and may change.'
+        ),
+        (
+            f'Three golden rules for buying {category.lower()} online: first, prefer brands with thousands of '
+            f'reviews; second, watch for items whose rating dropped recently — that usually means a bad batch; '
+            f'third, remember the price you see today may change tomorrow, so our links always show the live '
+            f'price. This guide was last refreshed on {today}.'
+        ),
+    ]
+    advice_heads = ['How to Choose the Right One', 'Before You Buy — Quick Checklist', 'Three Golden Rules']
+    sections.append({'heading': advice_heads[variant], 'body': advices[variant]})
 
     read_min = max(4, min(8, 3 + len(cats)))
     lines = []

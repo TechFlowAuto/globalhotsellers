@@ -38,7 +38,7 @@ SITE_SEEDS = {
 
 STOP = {
     'airfryer87', 'tv woman', '🔞', '免费', '视频', '直播', '成人',
-    'porn', 'xxx', 'nude', 'onlyfans',
+    'porn', 'xxx', 'nude', 'onlyfans', 'best buy',
 }
 
 def bing_suggest(q):
