@@ -68,7 +68,7 @@ def parse_products(src):
         "console.log(JSON.stringify(out));"
     )
     r = subprocess.run(
-        ['node', '--experimental-strip-types', '--input-type=module', '-e', code],
+        ['/usr/local/bin/node', '--experimental-strip-types', '--input-type=module', '-e', code],
         cwd=SITE, capture_output=True, text=True, timeout=60,
     )
     if r.returncode != 0:
@@ -314,7 +314,7 @@ def main():
         "console.log(JSON.stringify({ count: articles.length, last: articles[articles.length-1].slug }));"
     )
     r = subprocess.run(
-        ['node', '--experimental-strip-types', '--input-type=module', '-e', code],
+        ['/usr/local/bin/node', '--experimental-strip-types', '--input-type=module', '-e', code],
         cwd=SITE, capture_output=True, text=True, timeout=60,
     )
     if r.returncode != 0:
