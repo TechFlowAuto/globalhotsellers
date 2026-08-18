@@ -6,3 +6,7 @@ out/
 .subscribe-server/node_modules/
 .vercel
 .env*
+
+# 运行时文件：本地文章状态 + 日志（云端爬虫自行提交其日志）
+logs/*.log
+data/.last_article.json
