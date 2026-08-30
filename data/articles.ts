@@ -1011,6 +1011,52 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  {
+    slug: 'best-vitamins-for-energy-and-tiredness-20260830',
+    title: 'Best Vitamins For Energy And Tiredness (August 2026)',
+    description:
+      'Looking for best vitamins for energy and tiredness? We pull live Amazon best-seller data every day — here are the top picks real shoppers are buying right now, with honest buying guidance and current prices.',
+    keywords: [
+      'best vitamins for energy and tiredness',
+      'vital proteins collagen peptides',
+      'physician choice probiotics billion',
+    ],
+    date: '2026-08-30',
+    readTime: '7 min read',
+    category: 'Vitamins & Supplements',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'What Real Shoppers Are Buying Right Now',
+        body: 'We update this guide every morning with live Amazon sales data, so these are the Vitamins & Supplements products people are actually buying when they search for best vitamins for energy and tiredness — no paid placements, just what real shoppers choose. Here is what is trending in August 2026 and what it costs today.',
+      },
+      {
+        heading: '1. Vital Proteins Collagen Peptides Powder Advanced…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $83.99 with a 4.5-star average across 214,760 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00K6JUG4K'],
+      },
+      {
+        heading: '2. Physician\'s CHOICE Probiotics 60 Billion CFU - 10 Strains…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $21.35 with a 4.6-star average across 143,993 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B079H53D2B'],
+      },
+      {
+        heading: '3. Optimum Nutrition Creatine, Micronized Creatine…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $15.29 with a 4.6-star average across 78,178 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B002DYIZEE'],
+      },
+      {
+        heading: '4. Vital Proteins Collagen Peptides Powder, Unflavored…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $37.45 with a 4.6-star average across 68,592 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B09RQBHRCT'],
+      },
+      {
+        heading: 'Before You Buy — Quick Checklist',
+        body: 'A quick checklist before you buy vitamins & supplements: read the most recent reviews (not just the star rating), compare today\'s price against similar products, and check how many units the seller has moved this month. Products with steady sales and thousands of reviews are the safest bet. Prices were accurate at publication (2026-08-30) and may change.',
+      },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
