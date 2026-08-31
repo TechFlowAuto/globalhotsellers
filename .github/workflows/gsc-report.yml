@@ -1,0 +1,49 @@
+name: GSC Daily Report
+
+on:
+  schedule:
+    - cron: "5 1 * * *" # 09:05 Asia/Shanghai (UTC+8)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gsc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Write service account (from secret)
+        run: |
+          mkdir -p credentials
+          echo '${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}' > credentials/gsc-service-account.json
+          test -s credentials/gsc-service-account.json && echo "凭证已写入 ($(wc -c < credentials/gsc-service-account.json) bytes)"
+
+      - name: Configure git
+        run: |
+          git config user.name "TechFlowAuto"
+          git config user.email "13991218199@163.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/TechFlowAuto/globalhotsellers.git"
+
+      - name: Run GSC report
+        run: |
+          export GSC_CRED_PATH="$GITHUB_WORKSPACE/credentials/gsc-service-account.json"
+          python3 scripts/gsc_report.py --site all --days 2 >> logs/gsc_daily.log 2>&1
+          echo "--- 本次报告 ---"
+          tail -40 logs/gsc_daily.log
+
+      - name: Commit report log
+        run: |
+          git pull --rebase origin main 2>&1 || true
+          git add logs/gsc_daily.log
+          git commit -m "chore: GSC daily report $(date +%F)" 2>&1 || echo "无变更"
+          git push 2>&1 || echo "push 跳过（无变更或冲突已留待下次）"

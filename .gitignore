@@ -11,3 +11,8 @@ out/
 logs/*.log
 data/.last_article.json
 pins/
+
+# 凭证文件严禁入库
+credentials/
+# GSC 报告日志例外（云端 workflow 沉淀用）
+!logs/gsc_daily.log
