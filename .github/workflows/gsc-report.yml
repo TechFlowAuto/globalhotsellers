@@ -22,10 +22,10 @@ jobs:
       - name: Install deps
         run: pip install requests
 
-      - name: Write service account (from secret)
+      - name: Write service account (from secret, base64)
         run: |
           mkdir -p credentials
-          echo '${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}' > credentials/gsc-service-account.json
+          echo "${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}" | base64 -d > credentials/gsc-service-account.json
           test -s credentials/gsc-service-account.json && echo "凭证已写入 ($(wc -c < credentials/gsc-service-account.json) bytes)"
 
       - name: Configure git
