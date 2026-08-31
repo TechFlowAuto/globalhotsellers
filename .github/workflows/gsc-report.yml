@@ -36,6 +36,7 @@ jobs:
 
       - name: Run GSC report
         run: |
+          mkdir -p logs
           export GSC_CRED_PATH="$GITHUB_WORKSPACE/credentials/gsc-service-account.json"
           python3 scripts/gsc_report.py --site all --days 2 >> logs/gsc_daily.log 2>&1
           echo "--- 本次报告 ---"
