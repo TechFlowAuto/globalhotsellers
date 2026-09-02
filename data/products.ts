@@ -19,7 +19,8 @@ export const featuredProducts: Product[] = [
   {
     id: 'B0DY2VVZWZ',
     title: 'WHOOP One — 12-Month Membership',
-    description: '24/7 fitness & health wearable with sleep, strain & recovery tracking. Includes certified pre-owned WHOOP 5.0 device, 14+ day battery, personalized coaching, VO2 Max, heart rate zones, and women ... [truncated: crawler duplication fix]',
+    description: '24/7 fitness & health wearable with sleep, strain & recovery tracking. Includes certified pre-owned WHOOP 5.0 device, 14+ day battery, personalized coaching, VO2 Max, heart rate zones, and women\'s hormonal insights. HSA/FSA eligible.',
+
     price: '$199.00',
     currency: 'USD',
     imageUrl: '/images/products/b0dy2vvzwz.jpg',
@@ -29,6 +30,7 @@ export const featuredProducts: Product[] = [
     reviewCount: 892,
     affiliateUrl: 'https://amazon.com/dp/B0DY2VVZWZ?tag=globalhotsell-20',
     source: 'Amazon — WHOOP + 12-Month Membership Bundle',
+
   },
   {
     id: 'B0GH3474YH',
@@ -42,7 +44,8 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 279,
     affiliateUrl: 'https://amazon.com/dp/B0GH3474YH?tag=globalhotsell-20',
-    source: 'Amazon',
+    source: 'Amazon\'s Choice — Galaxy S26 512GB',
+
   },
   {
     id: 'B09T4YZGQR',
@@ -210,7 +213,8 @@ export const featuredProducts: Product[] = [
     rating: 4.6,
     reviewCount: 78900,
     affiliateUrl: 'https://amazon.com/dp/B071JYV6LN?tag=globalhotsell-20',
-    source: 'Amazon Best Sellers #1 in Men',
+    source: 'Amazon Best Sellers #1 in Men\'s Sweatshirts',
+
   },
   {
     id: 'B0B3HTQ4YT',
@@ -224,12 +228,14 @@ export const featuredProducts: Product[] = [
     rating: 4.5,
     reviewCount: 56780,
     affiliateUrl: 'https://amazon.com/dp/B0B3HTQ4YT?tag=globalhotsell-20',
-    source: 'Amazon Best Sellers in Women',
+    source: 'Amazon Best Sellers in Women\'s Leggings',
+
   },
   {
     id: 'B0922GS6FD',
     title: 'Tucketts Toeless Pilates Socks with Grips',
-    description: 'Non-slip open-toe grip socks for yoga, barre, dance & reformer pilates. Silicone grips on sole, moisture-wicking fabric. Women ... [truncated: crawler duplication fix]',
+    description: 'Non-slip open-toe grip socks for yoga, barre, dance & reformer pilates. Silicone grips on sole, moisture-wicking fabric. Women\'s sizes.',
+
     price: '$14.99',
     currency: 'USD',
     imageUrl: '/images/products/b0922gs6fd.jpg',

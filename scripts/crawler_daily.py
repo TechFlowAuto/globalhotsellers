@@ -221,30 +221,54 @@ def download_image(url, asin):
     return f'/images/products/{asin.lower()}.jpg'
 
 
+_STR = r"'((?:[^'\\]|\\.)*)'"  # 转义感知字符串匹配: 处理 \' 等转义
+
+def unescape_ts(s):
+    """反转义 TS 单引号字符串: \\ → \, \' → '；并清除膨胀残留的连续反斜杠段"""
+    s = re.sub(r'\\{2,}', '', s)  # 清除爬虫 bug 残留的连续反斜杠（正常文本不会有连续 2+ 反斜杠）
+    out = []
+    i = 0
+    while i < len(s):
+        if s[i] == '\\' and i + 1 < len(s):
+            nxt = s[i + 1]
+            if nxt == '\\':
+                out.append('\\'); i += 2; continue
+            if nxt == "'":
+                out.append("'"); i += 2; continue
+        out.append(s[i]); i += 1
+    return ''.join(out)
+
+
 def load_existing():
     """读取现有 products.ts 的商品"""
     if not os.path.exists(DATA_FILE):
         return []
     ts = open(DATA_FILE).read()
+    if os.path.getsize(DATA_FILE) > 5 * 1024 * 1024:
+        print(f'⚠️ products.ts 异常巨大 ({os.path.getsize(DATA_FILE)/1024/1024:.0f}MB)，拒绝加载，等待人工处理')
+        return []
     m = re.search(r'export const featuredProducts: Product\[\] = \[(.*?)\];?\s*$', ts, re.S)
     if not m:
         return []
     arr = m.group(1)
+    # 注意: 所有字符串字段均用 _STR 转义感知匹配，防止含 \' 的字段被截断
     items = re.findall(
-        r"\{\s*id: '([^']+)'.*?title: '([^']*)'.*?description: '([^']*)'.*?"
-        r"price: '([^']*)'.*?(?:originalPrice: '([^']*)',)?.*?currency: '([^']*)'.*?"
-        r"imageUrl: '([^']*)'.*?platform: '([^']*)'.*?category: '([^']*)'.*?"
+        r"\{\s*id: " + _STR + r".*?title: " + _STR + r".*?description: " + _STR + r".*?"
+        r"price: " + _STR + r".*?(?:originalPrice: " + _STR + r",)?.*?currency: " + _STR + r".*?"
+        r"imageUrl: " + _STR + r".*?platform: " + _STR + r".*?category: " + _STR + r".*?"
         r"rating: ([\d.]+).*?reviewCount: (\d+).*?(?:badge: '(\w+)',)?.*?"
-        r"affiliateUrl: '([^']*)'.*?source: '([^']*)'",
+        r"affiliateUrl: " + _STR + r".*?source: " + _STR,
         arr, re.S)
     products = []
     for it in items:
         products.append({
-            'id': it[0], 'title': it[1], 'description': it[2], 'price': it[3],
-            'originalPrice': it[4] or '', 'currency': it[5], 'imageUrl': it[6],
-            'platform': it[7], 'category': it[8], 'rating': float(it[9]),
-            'reviewCount': int(it[10]), 'badge': it[11] or '', 'affiliateUrl': it[12],
-            'source': it[13],
+            'id': unescape_ts(it[0]), 'title': unescape_ts(it[1]),
+            'description': unescape_ts(it[2]), 'price': unescape_ts(it[3]),
+            'originalPrice': unescape_ts(it[4] or ''), 'currency': unescape_ts(it[5]),
+            'imageUrl': unescape_ts(it[6]), 'platform': unescape_ts(it[7]),
+            'category': unescape_ts(it[8]), 'rating': float(it[9]),
+            'reviewCount': int(it[10]), 'badge': it[11] or '',
+            'affiliateUrl': unescape_ts(it[12]), 'source': unescape_ts(it[13]),
         })
     return products
 
