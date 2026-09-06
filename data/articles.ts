@@ -1747,6 +1747,144 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  {
+    slug: 'best-vitamins-for-women-over-40-20260906',
+    title: 'Best Vitamins For Women Over 40 (September 2026)',
+    description:
+      'Looking for best vitamins for women over 40? We pull live Amazon best-seller data every day — here are the top picks real shoppers are buying right now, with honest buying guidance and current prices.',
+    keywords: [
+      'best vitamins for women over 40',
+      'vital proteins collagen peptides',
+      'physician choice probiotics billion',
+    ],
+    date: '2026-09-06',
+    readTime: '7 min read',
+    category: 'Vitamins & Supplements',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'What Real Shoppers Are Buying Right Now',
+        body: 'We update this guide every morning with live Amazon sales data, so these are the Vitamins & Supplements products people are actually buying when they search for best vitamins for women over 40 — no paid placements, just what real shoppers choose. Here is what is trending in September 2026 and what it costs today.',
+      },
+      {
+        heading: '1. Vital Proteins Collagen Peptides Powder Advanced…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $83.99 with a 4.5-star average across 214,760 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00K6JUG4K'],
+      },
+      {
+        heading: '2. Physician\'s CHOICE Probiotics 60 Billion CFU - 10 Strains…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $24.97 with a 4.5-star average across 143,993 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B079H53D2B'],
+      },
+      {
+        heading: '3. Optimum Nutrition Creatine, Micronized Creatine…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $15.29 with a 4.6-star average across 78,178 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B002DYIZEE'],
+      },
+      {
+        heading: '4. Vital Proteins Collagen Peptides Powder, Unflavored…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $37.45 with a 4.6-star average across 68,592 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B09RQBHRCT'],
+      },
+      {
+        heading: 'Before You Buy — Quick Checklist',
+        body: 'A quick checklist before you buy vitamins & supplements: read the most recent reviews (not just the star rating), compare today\'s price against similar products, and check how many units the seller has moved this month. Products with steady sales and thousands of reviews are the safest bet. Prices were accurate at publication (2026-09-06) and may change.',
+      },
+    ],
+  },
+
+  {
+    slug: 'best-vitamins-for-women-over-70-20260906',
+    title: 'Best Vitamins For Women Over 70 (September 2026)',
+    description:
+      'Looking for best vitamins for women over 70? We pull live Amazon best-seller data every day — here are the top picks real shoppers are buying right now, with honest buying guidance and current prices.',
+    keywords: [
+      'best vitamins for women over 70',
+      'vital proteins collagen peptides',
+      'physician choice probiotics billion',
+    ],
+    date: '2026-09-06',
+    readTime: '7 min read',
+    category: 'Vitamins & Supplements',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'Why These Picks Keep Topping the Charts',
+        body: 'Shopping for best vitamins for women over 70? This guide is built from live Amazon best-seller data we refresh every morning — so these are the exact products real shoppers are buying right now, not paid placements. For September 2026, these Vitamins & Supplements picks keep showing up in the rankings, and each one below is in our catalog today with a current price and rating.',
+      },
+      {
+        heading: '1. Vital Proteins Collagen Peptides Powder Advanced…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $83.99 with a 4.5-star average across 214,760 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00K6JUG4K'],
+      },
+      {
+        heading: '2. Physician\'s CHOICE Probiotics 60 Billion CFU - 10 Strains…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $24.97 with a 4.5-star average across 143,993 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B079H53D2B'],
+      },
+      {
+        heading: '3. Optimum Nutrition Creatine, Micronized Creatine…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $15.29 with a 4.6-star average across 78,178 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B002DYIZEE'],
+      },
+      {
+        heading: '4. Vital Proteins Collagen Peptides Powder, Unflavored…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $37.45 with a 4.6-star average across 68,592 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B09RQBHRCT'],
+      },
+      {
+        heading: 'How to Choose the Right One',
+        body: 'How to pick the right Vitamins & Supplements product: compare ratings above 4 stars and review counts in the hundreds or more, check the most recent reviews for quality complaints, and watch the price — Amazon prices move daily and our links always show the live price. When in doubt, buy from a brand with a long track record and a solid return policy. Prices and availability were accurate when this guide was published (2026-09-06) and may change.',
+      },
+    ],
+  },
+
+  {
+    slug: 'best-vitamins-for-women-over-30-20260906',
+    title: 'Best Vitamins For Women Over 30 (September 2026)',
+    description:
+      'Looking for best vitamins for women over 30? We pull live Amazon best-seller data every day — here are the top picks real shoppers are buying right now, with honest buying guidance and current prices.',
+    keywords: [
+      'best vitamins for women over 30',
+      'vital proteins collagen peptides',
+      'physician choice probiotics billion',
+    ],
+    date: '2026-09-06',
+    readTime: '7 min read',
+    category: 'Vitamins & Supplements',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'The Data Behind These Picks',
+        body: 'If you are searching for best vitamins for women over 30, you have come to the right place. This list comes straight from Amazon best-seller rankings that we refresh daily — the picks below are the ones real buyers keep choosing in September 2026, each with a current price and rating.',
+      },
+      {
+        heading: '1. Vital Proteins Collagen Peptides Powder Advanced…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $83.99 with a 4.5-star average across 214,760 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00K6JUG4K'],
+      },
+      {
+        heading: '2. Physician\'s CHOICE Probiotics 60 Billion CFU - 10 Strains…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $24.97 with a 4.5-star average across 143,993 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B079H53D2B'],
+      },
+      {
+        heading: '3. Optimum Nutrition Creatine, Micronized Creatine…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $15.29 with a 4.6-star average across 78,178 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B002DYIZEE'],
+      },
+      {
+        heading: '4. Vital Proteins Collagen Peptides Powder, Unflavored…',
+        body: 'This is one of the most-purchased Vitamins & Supplements items in our daily Amazon data. It is currently listed at $37.45 with a 4.6-star average across 68,592 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B09RQBHRCT'],
+      },
+      {
+        heading: 'Three Golden Rules',
+        body: 'Three golden rules for buying vitamins & supplements online: first, prefer brands with thousands of reviews; second, watch for items whose rating dropped recently — that usually means a bad batch; third, remember the price you see today may change tomorrow, so our links always show the live price. This guide was last refreshed on 2026-09-06.',
+      },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
