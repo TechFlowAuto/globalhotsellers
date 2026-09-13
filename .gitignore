@@ -16,3 +16,6 @@ pins/
 credentials/
 # GSC 报告日志例外（云端 workflow 沉淀用）
 !logs/gsc_daily.log
+
+# Pinterest API token（本地专用，严禁入库）
+config/pinterest.json
