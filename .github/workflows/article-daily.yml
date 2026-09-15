@@ -7,6 +7,9 @@ on:
     - cron: "30 4 * * *"
     - cron: "30 10 * * *"
     - cron: "30 14 * * *"
+  push:
+    paths:
+      - '.github/workflows/article-daily.yml'
   workflow_dispatch:
 
 permissions:
