@@ -1,0 +1,56 @@
+name: Daily Article (GHS)
+
+on:
+  schedule:
+    # Asia/Shanghai 07:30 / 12:30 / 18:30 / 22:30 (UTC+8)
+    - cron: "30 23 * * *"
+    - cron: "30 4 * * *"
+    - cron: "30 10 * * *"
+    - cron: "30 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  article:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pillow (pin generator dependency)
+        run: pip install Pillow
+
+      - name: Configure git (push via GITHUB_TOKEN)
+        run: |
+          git config user.name "TechFlowAuto"
+          git config user.email "13991218199@163.com"
+          git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/TechFlowAuto/globalhotsellers.git"
+
+      - name: Generate article
+        run: python3 scripts/generate_article.py .
+        timeout-minutes: 10
+
+      - name: Commit & push
+        run: |
+          git pull --rebase origin main || true
+          git add data/articles.ts
+          if git diff --cached --quiet; then
+            echo "no new article, skip commit"
+          else
+            git commit -m "每日文章更新 $(date +%F)"
+            git push origin main
+          fi
+
+      - name: Show log tail (always)
+        if: always()
+        run: |
+          echo "--- article.log tail ---"
+          tail -20 logs/article.log 2>/dev/null || echo "(no log)"
+          echo "--- git log ---"
+          git log --oneline -3 2>/dev/null || true
