@@ -3359,7 +3359,6 @@ export const articles: Article[] = [
   },
 
   {
-  {
     slug: 'best-vitamins-for-hair-growth-amazon-20260915-2',
     title: 'Best Vitamins For Hair Growth (September 2026)',
     description:
