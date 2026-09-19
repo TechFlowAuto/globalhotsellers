@@ -139,6 +139,29 @@ export default function ArticlePage({ params }: Props) {
           ))}
         </div>
 
+        {/* Tool recommendation */}
+        <div className="mt-12 bg-gradient-to-br from-indigo-600 to-cyan-500 rounded-2xl p-8 text-center text-white">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/80 mb-2">
+            Recommended tool
+          </p>
+          <h3 className="text-xl font-bold mb-2">
+            Never overpay on Amazon again
+          </h3>
+          <p className="text-white/90 mb-5">
+            <strong>PriceTrack</strong> shows the full price history on any Amazon
+            product page — so you know instantly whether today&apos;s price is high
+            or low. Includes optional price-drop alerts. No account required.
+          </p>
+          <a
+            href="https://payhip.com/b/fLomD"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center space-x-2 bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
+          >
+            <span>Get PriceTrack — $9</span>
+          </a>
+        </div>
+
         {/* CTA */}
         <div className="mt-12 bg-white rounded-2xl border border-gray-200 p-8 text-center">
           <h3 className="text-xl font-bold text-gray-900 mb-2">
