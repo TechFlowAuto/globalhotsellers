@@ -162,16 +162,17 @@ def make_article(products, category, date, existing_slugs, keyword=None):
         if words:
             kw.append(' '.join(words[:4]))
 
-    if keyword:
-        description = (
-            f'Looking for {keyword}? We pull live Amazon best-seller data every day — here are the '
-            f'top picks real shoppers are buying right now, with honest buying guidance and current prices.'
-        )
-    else:
-        description = (
-            f'We pull live Amazon best-seller data every day. Here are the {category} '
-            f'products real shoppers are buying right now — with honest buying guidance and current prices.'
-        )
+    # 描述多样化: 全站共用同一模板会让 meta description 高度重复(SEO 不利)
+    # 用 hash 在多个句式间轮换, 保证每篇文章描述有差异
+    kw_phrase = keyword if keyword else category.lower()
+    desc_variants = [
+        f'Looking for {kw_phrase}? We track live Amazon best-seller data every morning — here are the picks real shoppers buy, with current prices.',
+        f'Which {category.lower()} are actually worth buying? We rank them from live Amazon best-seller data, refreshed daily — no sponsored picks, just what real buyers choose.',
+        f'{kw_phrase}, ranked by live Amazon sales data. See what real shoppers are buying right now — current prices, ratings, and honest guidance.',
+        f'We refresh live Amazon best-seller rankings daily so you can see the top {category.lower()} real buyers choose — with current prices, ratings, and what to skip.',
+    ]
+    d_idx = int(hashlib.md5((('desc:' + (keyword or category)) + day_key).encode()).hexdigest(), 16) % len(desc_variants)
+    description = desc_variants[d_idx]
 
     sections = []
     variant = int(hashlib.md5(((keyword or category) + day_key).encode()).hexdigest(), 16) % 3
