@@ -286,7 +286,7 @@ export const featuredProducts: Product[] = [
     id: 'B0DGHMNQ5Z',
     title: 'Apple AirPods 4 Wireless Earbuds, Bluetooth Headphones, Personalized Spatial Audio, Sweat and Water Resistant, USB-C Charging',
     description: 'Apple AirPods 4 Wireless Earbuds, Bluetooth Headphones, Personalized Spatial Audio, Sweat and Water Resistant, USB-C Charging — Amazon Best Seller in Electronics. Rated 4.6 stars from 32,953 reviews. Hot product trending on Amazon right now.',
-    price: '$92.18',
+    price: '$91.26',
     currency: 'USD',
     imageUrl: '/images/products/b0dghmnq5z.jpg',
     platform: 'Amazon',
