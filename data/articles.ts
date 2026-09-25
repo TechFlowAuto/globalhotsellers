@@ -2900,7 +2900,7 @@ export const articles: Article[] = [
 
   {
     slug: 'best-vitamins-for-skin-elasticity-20260912',
-    title: 'Best Vitamins For Skin Elasticity (September 2026)',
+    title: 'Best Vitamins for Skin Elasticity 2026: 7 Picks That Work',
     description:
       'Looking for best vitamins for skin elasticity? We pull live Amazon best-seller data every day — here are the top picks real shoppers are buying right now, with honest buying guidance and current prices.',
     keywords: [
