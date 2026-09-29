@@ -16,17 +16,6 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const article = getArticle(params.slug)
-
-  // 内链网络：同类别相关文章（排除自身与重复页），给每篇文章建立站内链接
-  const related = articles
-    .filter(
-      (a) =>
-        a.slug !== article?.slug &&
-        a.category === article?.category &&
-        !isDuplicateArticle(a.slug)
-    )
-    .slice(-4)
-    .reverse()
   if (!article) return {}
 
   // 重复页（同一主关键词被历史 bug 多次生成）→ noindex，并把 canonical
@@ -61,6 +50,17 @@ function getProducts(ids?: string[]) {
 
 export default function ArticlePage({ params }: Props) {
   const article = getArticle(params.slug)
+
+  // 内链网络：同类别相关文章（排除自身与重复页）
+  const related = articles
+    .filter(
+      (a) =>
+        a.slug !== article?.slug &&
+        a.category === article?.category &&
+        !isDuplicateArticle(a.slug)
+    )
+    .slice(-4)
+    .reverse()
   if (!article) notFound()
 
   return (
