@@ -84,6 +84,26 @@ def parse_existing_articles(src):
         raise RuntimeError('未找到 articles 数组结尾')
     return set(slugs), end + 1
 
+
+def parse_used_keywords(src):
+    """从现有 articles.ts 反推已用过的关键词。
+
+    v2 (2026-09-29) 修复：
+      云端 GitHub Actions 拿不到 data/.last_article.json（被 .gitignore 排除），
+      导致 used_kws 永远为空 → 每天都从词库第一条重新开始
+      → 同一关键词被反复生成（实测 GHS 56 篇 / PHS 57 篇重复）。
+
+    改为以 articles.ts 为唯一事实来源（它一定在 git 里），
+    这样本地和云端行为一致，不再依赖状态文件。
+    """
+    # 每篇的 keywords 数组第一项 = 主关键词
+    primary = re.findall(r"keywords:\s*\[\s*\n?\s*'([^']+)'", src)
+    used = set()
+    for k in primary:
+        used.add(k)
+        # 兼容旧格式：把标题反推的词也纳入（如 'best dog food for allergies'）
+    return used
+
 # ---------- 文章生成 ----------
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -275,12 +295,14 @@ def main():
     existing_slugs, insert_at = parse_existing_articles(src_a)
 
     prev = None
-    used = set()
+    # v2: 以 articles.ts 为唯一事实来源（云端也能读到，修复重复生成）
+    used = parse_used_keywords(src_a)
     if os.path.exists(STATE_PATH):
         try:
             st = json.loads(read(STATE_PATH))
             prev = st.get('category')
-            used = set(st.get('used_kws', []))
+            # 合并 state（本地补跑时可能领先于已提交的文章）
+            used |= set(st.get('used_kws', []))
         except Exception:
             prev = None
 
