@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { articles, getArticle } from '@/data/articles'
 import { featuredProducts } from '@/data/products'
 import { siteConfig } from '@/site.config'
+import { isDuplicateArticle, getCanonicalSlug } from '@/lib/duplicate-articles'
 import { Star, ExternalLink } from 'lucide-react'
 
 interface Props {
@@ -16,7 +17,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const article = getArticle(params.slug)
   if (!article) return {}
-  return {
+
+  // 重复页（同一主关键词被历史 bug 多次生成）→ noindex，并把 canonical
+  // 指向最早的那一篇，避免搜索引擎把 56 个近似页面当成重复内容。
+  const canonical = getCanonicalSlug(article.slug)
+  const meta: Record<string, unknown> = {
     title: article.title,
     description: article.description,
     keywords: article.keywords.join(', '),
@@ -29,6 +34,11 @@ export async function generateMetadata({ params }: Props) {
       publishedTime: article.date,
     },
   }
+  if (canonical) {
+    meta.robots = { index: false, follow: true }
+    meta.alternates = { canonical: `${siteConfig.domain}/blog/${canonical}` }
+  }
+  return meta
 }
 
 function getProducts(ids?: string[]) {
