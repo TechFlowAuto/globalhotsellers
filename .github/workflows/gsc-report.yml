@@ -37,8 +37,10 @@ jobs:
       - name: Run GSC report
         run: |
           mkdir -p logs
+          # 回溯窗口必须 >=14 天：GSC 数据固有 2-3 天延迟，
+          # 窗口过窄会天天报"无数据"（2026-09-21 本地已修，2026-09-29 同步云端）
           export GSC_CRED_PATH="$GITHUB_WORKSPACE/credentials/gsc-service-account.json"
-          python3 scripts/gsc_report.py --site all --days 2 >> logs/gsc_daily.log 2>&1
+          python3 scripts/gsc_report.py --site all --days 14 >> logs/gsc_daily.log 2>&1
           echo "--- 本次报告 ---"
           tail -40 logs/gsc_daily.log
 
