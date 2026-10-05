@@ -7864,6 +7864,52 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  {
+    slug: 'toys-for-kids-with-autism-and-anxiety-20261005',
+    title: 'Toys For Kids With Autism And Anxiety (October 2026)',
+    description:
+      'We refresh live Amazon best-seller rankings daily so you can see the top toys & games real buyers choose — with current prices, ratings, and what to skip.',
+    keywords: [
+      'toys for kids with autism and anxiety',
+      'play modeling compound pack',
+      'mattel games card game',
+    ],
+    date: '2026-10-05',
+    readTime: '7 min read',
+    category: 'Toys & Games',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'What Real Shoppers Are Buying Right Now',
+        body: 'We update this guide every morning with live Amazon sales data, so these are the Toys & Games products people are actually buying when they search for toys for kids with autism and anxiety — no paid placements, just what real shoppers choose. Here is what is trending in October 2026 and what it costs today.',
+      },
+      {
+        heading: '1. Play Doh Modeling Compound 10-Pack Case of Assorted…',
+        body: 'This is one of the most-purchased Toys & Games items in our daily Amazon data. It is currently listed at $7.99 with a 4.7-star average across 68,849 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00JM5GW10'],
+      },
+      {
+        heading: '2. Mattel Games UNO Card Game for Kid, Adult & Family Nights…',
+        body: 'This is one of the most-purchased Toys & Games items in our daily Amazon data. It is currently listed at $10.56 with a 4.8-star average across 60,724 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B07P6MZPK3'],
+      },
+      {
+        heading: '3. Crayola Colored Pencils (36ct), Teacher School Supplies…',
+        body: 'This is one of the most-purchased Toys & Games items in our daily Amazon data. It is currently listed at $7.99 with a 4.8-star average across 50,027 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B00006RVTS'],
+      },
+      {
+        heading: '4. Play-Doh Jewel Colors Bulk 12-Pack of 4-Ounce Cans',
+        body: 'This is one of the most-purchased Toys & Games items in our daily Amazon data. It is currently listed at $12.36 with a 4.8-star average across 25,476 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B07BC44JFC'],
+      },
+      {
+        heading: 'Before You Buy — Quick Checklist',
+        body: 'A quick checklist before you buy toys & games: read the most recent reviews (not just the star rating), compare today\'s price against similar products, and check how many units the seller has moved this month. Products with steady sales and thousands of reviews are the safest bet. Prices were accurate at publication (2026-10-05) and may change.',
+      },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
