@@ -8278,6 +8278,52 @@ export const articles: Article[] = [
       },
     ],
   },
+
+  {
+    slug: 'probiotics-for-dogs-with-yeast-problems-20261007',
+    title: 'Probiotics For Dogs With Yeast Problems (October 2026)',
+    description:
+      'We refresh live Amazon best-seller rankings daily so you can see the top dog supplies real buyers choose — with current prices, ratings, and what to skip.',
+    keywords: [
+      'probiotics for dogs with yeast problems',
+      'earth rated wipes paws',
+      'blue buffalo life protection',
+    ],
+    date: '2026-10-07',
+    readTime: '7 min read',
+    category: 'Dog Supplies',
+    emoji: '🛒',
+    sections: [
+      {
+        heading: 'Why These Picks Keep Topping the Charts',
+        body: 'Shopping for probiotics for dogs with yeast problems? This guide is built from live Amazon best-seller data we refresh every morning — so these are the exact products real shoppers are buying right now, not paid placements. For October 2026, these Dog Supplies picks keep showing up in the rankings, and each one below is in our catalog today with a current price and rating.',
+      },
+      {
+        heading: '1. Earth Rated Dog Wipes for Paws & Butt, Deodorizing…',
+        body: 'This is one of the most-purchased Dog Supplies items in our daily Amazon data. It is currently listed at $8.99 with a 4.6-star average across 68,504 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B07NHL31CC'],
+      },
+      {
+        heading: '2. Blue Buffalo Life Protection Formula Chicken Adult Dry Dog…',
+        body: 'This is one of the most-purchased Dog Supplies items in our daily Amazon data. It is currently listed at $14.97 with a 4.7-star average across 29,510 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B09K8YYVWV'],
+      },
+      {
+        heading: '3. Pedigree Dentastix Large Breed Dental Dog Treats, Fresh…',
+        body: 'This is one of the most-purchased Dog Supplies items in our daily Amazon data. It is currently listed at $16.98 with a 4.8-star average across 22,089 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B07NJLMDNQ'],
+      },
+      {
+        heading: '4. Pur Luv Chicken Jerky Dog Treats, Made with 100% Real…',
+        body: 'This is one of the most-purchased Dog Supplies items in our daily Amazon data. It is currently listed at $14.09 with a 4.6-star average across 13,380 reviews. We include it because it keeps showing up in the best-seller rankings — steady demand and consistent ratings are usually a better signal than flashy marketing. Check the product page for the latest price, as Amazon deals change frequently.',
+        productIds: ['B08P2D95G8'],
+      },
+      {
+        heading: 'How to Choose the Right One',
+        body: 'How to pick the right Dog Supplies product: compare ratings above 4 stars and review counts in the hundreds or more, check the most recent reviews for quality complaints, and watch the price — Amazon prices move daily and our links always show the live price. When in doubt, buy from a brand with a long track record and a solid return policy. Prices and availability were accurate when this guide was published (2026-10-07) and may change.',
+      },
+    ],
+  },
 ]
 
 export function getArticle(slug: string): Article | undefined {
