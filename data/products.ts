@@ -356,7 +356,7 @@ export const featuredProducts: Product[] = [
     id: 'B08KT2Z93D',
     title: 'eos Shea Better Body Lotion Vanilla Cashmere, 24-Hour Moisture Skin Care, Lightweight &amp; Non-Greasy, Natural Shea, Vegan, Vani',
     description: 'eos Shea Better Body Lotion Vanilla Cashmere, 24-Hour Moisture Skin Care, Lightweight &amp; Non-Greasy, Natural Shea, Vegan, Vani — Amazon Best Seller in Beauty. Rated 4.7 stars from 72,637 reviews. Hot product trending on Amazon right now.',
-    price: '$21.99',
+    price: '$13.89',
     currency: 'USD',
     imageUrl: '/images/products/b08kt2z93d.jpg',
     platform: 'Amazon',
