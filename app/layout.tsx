@@ -34,6 +34,12 @@ export const metadata: Metadata = {
     creator: '@GlobalHotSellers',
   },
   metadataBase: new URL(siteConfig.domain),
+  // Pinterest 域名认领验证（2026-10-12）
+  verification: {
+    other: {
+      'p:domain_verify': 'da4dcfa7bd1e458130cce7bddace7b30',
+    },
+  },
 }
 
 export default function RootLayout({
