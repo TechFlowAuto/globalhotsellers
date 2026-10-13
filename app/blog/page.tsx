@@ -6,6 +6,7 @@ export const metadata = {
   title: `Buying Guides & Trending Product Lists | ${siteConfig.name}`,
   description:
     'Data-backed buying guides and trending product lists, updated from live Amazon best-seller data.',
+  alternates: { canonical: '/blog' },
 }
 
 export default function BlogPage() {

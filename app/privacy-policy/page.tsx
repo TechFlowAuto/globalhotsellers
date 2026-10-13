@@ -1,5 +1,9 @@
 import React from 'react';
 
+export const metadata = {
+  alternates: { canonical: '/privacy-policy' },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">

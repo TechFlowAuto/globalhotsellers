@@ -1,6 +1,10 @@
 import React from 'react';
 import { Mail, Phone, MapPin, MessageSquare, Send, Clock } from 'lucide-react';
 
+export const metadata = {
+  alternates: { canonical: '/contact' },
+};
+
 export default function ContactPage() {
   const contactMethods = [
     {

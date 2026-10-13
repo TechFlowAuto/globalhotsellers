@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: Props) {
     title: article.title,
     description: article.description,
     keywords: article.keywords.join(', '),
+    alternates: { canonical: `${siteConfig.domain}/blog/${canonical ?? article.slug}` },
     openGraph: {
       title: article.title,
       description: article.description,
@@ -36,7 +37,6 @@ export async function generateMetadata({ params }: Props) {
   }
   if (canonical) {
     meta.robots = { index: false, follow: true }
-    meta.alternates = { canonical: `${siteConfig.domain}/blog/${canonical}` }
   }
   return meta
 }

@@ -4,7 +4,12 @@ import ProductCard from '@/components/ProductCard'
 import EmailSubscribe from '@/components/EmailSubscribe'
 import { featuredProducts, platforms, categories } from '@/data/products'
 import { articles } from '@/data/articles'
+import { siteConfig } from '@/site.config'
 import { TrendingUp, Star, Globe, Zap, ChevronRight } from 'lucide-react'
+
+export const metadata = {
+  alternates: { canonical: '/', },
+}
 
 export default function Home() {
   return (

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Globe, Zap, Shield, TrendingUp, Users, Target } from 'lucide-react';
 
+export const metadata = {
+  alternates: { canonical: '/about' },
+};
+
 export default function AboutPage() {
   const teamMembers = [
     {
