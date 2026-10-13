@@ -5,6 +5,7 @@ import { featuredProducts } from '@/data/products'
 import { siteConfig } from '@/site.config'
 import { isDuplicateArticle, getCanonicalSlug } from '@/lib/duplicate-articles'
 import { Star, ExternalLink } from 'lucide-react'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 interface Props {
   params: { slug: string }
@@ -203,6 +204,8 @@ export default function ArticlePage({ params }: Props) {
             <span>Get PriceTrack — $9</span>
           </a>
         </div>
+
+        <NewsletterSignup />
 
         {/* CTA */}
         <div className="mt-12 bg-white rounded-2xl border border-gray-200 p-8 text-center">
