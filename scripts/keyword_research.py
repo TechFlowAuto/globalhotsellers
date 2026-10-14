@@ -30,6 +30,22 @@ SITE_SEEDS = {
         'robot vacuum', 'air fryer', 'mascara', 'shampoo', 'skincare',
         'fitness tracker', 'yoga mat', 'resistance bands', 'dumbbells',
         'toys for kids', 'board games', 'kitchen gadgets', 'pillow',
+        # --- 2026-10-14 新增 5 个品类方向（老板拍板）---
+        # 1) 宠物用品（与 PHS 联动）
+        'best dog food', 'dog grooming', 'dog bed', 'pet camera', 'cat litter',
+        'pet water fountain', 'dog leash', 'pet carrier',
+        # 2) 户外 / 露营装备
+        'camping tent', 'sleeping bag', 'camping stove', 'hiking backpack',
+        'camping chair', 'cooler', 'headlamp', 'camping lantern',
+        # 3) 厨房小家电升级
+        'instant pot', 'blender', 'coffee maker', 'electric kettle',
+        'toaster oven', 'food processor', 'vacuum sealer', 'stand mixer',
+        # 4) 健身器材 / 居家健身
+        'adjustable dumbbells', 'kettlebell', 'treadmill', 'exercise bike',
+        'pull up bar', 'foam roller', 'jump rope', 'rowing machine',
+        # 5) 婴童用品
+        'baby monitor', 'stroller', 'diaper bag', 'baby carrier', 'high chair',
+        'crib', 'baby bottles', 'pregnancy pillow',
     ],
     'pethotsellers': [
         'best dog food', 'dog treats', 'dog toys', 'dog supplements',
