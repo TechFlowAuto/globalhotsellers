@@ -25,6 +25,14 @@ ARTICLES_PATH = os.path.join(DATA_DIR, 'articles.ts')
 STATE_PATH = os.path.join(DATA_DIR, '.last_article.json')
 KEYWORDS_PATH = os.path.join(DATA_DIR, 'keywords.json')
 
+# 宠物词留给 PHS（pethotsellers.com），GHS 不自产宠文 —— 2026-10-14 老板拍板 B
+PET_SKIP = re.compile(
+    r"\b(dog|dogs|cat|cats|pet|pets|puppy|puppies|kitten|reptile|aquarium|fish tank|"
+    r"bird|hamster|kennel|litter|leash|chew|veterinar|feline|canine)\b",
+    re.I,
+)
+
+
 # 品类特征词: 关键词 → 品类匹配 (长尾词定位到有商品的品类)
 CATEGORY_KEYWORDS = {
     'Dog Supplies': ['dog', 'puppy', 'canine', 'leash', 'chew', 'german shepherd', 'golden retriever'],
@@ -317,6 +325,8 @@ def main():
         for k in kws:
             if k['kw'] in used:
                 continue
+            if PET_SKIP.search(k['kw']):
+                continue  # 宠物词留给 PHS，GHS 不自产
             cat = match_keyword_to_category(k['kw'], products)
             if cat and sum(1 for p in products if p['category'] == cat) >= 3:
                 keyword = k['kw']

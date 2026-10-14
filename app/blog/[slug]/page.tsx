@@ -223,7 +223,22 @@ export default function ArticlePage({ params }: Props) {
             <span>Browse trending products</span>
           </Link>
         </div>
+
+        {/* 姐妹站导流：宠物需求 -> PetHotSellers */}
+        <p className="mt-8 text-center text-sm text-gray-500">
+          Shopping for a dog or cat? See our sister site{' '}
+          <a
+            href="https://pethotsellers.com"
+            className="text-primary underline"
+            target="_blank"
+            rel="noopener"
+          >
+            PetHotSellers
+          </a>{' '}
+          for pet product guides.
+        </p>
       </div>
     </div>
   )
 }
+
