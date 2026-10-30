@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: '/products' },
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function ProductsPage({
   searchParams,
 }: {
