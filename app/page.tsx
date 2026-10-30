@@ -23,7 +23,7 @@ export default function Home() {
             {categories.map((cat) => (
               <a
                 key={cat.name}
-                href="#"
+                href={`/products?category=${encodeURIComponent(cat.name)}`}
                 className="inline-flex items-center space-x-2 px-5 py-3 rounded-full bg-gray-50 hover:bg-primary/5 hover:text-primary border border-gray-200 hover:border-primary/30 transition-all text-gray-700 font-medium"
               >
                 <span>{cat.icon}</span>
@@ -51,13 +51,13 @@ export default function Home() {
                 The hottest products from around the world, updated daily.
               </p>
             </div>
-            <a
-              href="#"
+            <Link
+              href="/products"
               className="hidden md:flex items-center space-x-1 text-primary font-semibold hover:text-primary-600 transition-colors"
             >
               <span>View All</span>
               <ChevronRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -67,13 +67,13 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-10">
-            <a
-              href="#"
+            <Link
+              href="/products"
               className="inline-flex items-center space-x-2 bg-white border-2 border-primary text-primary font-semibold px-8 py-3 rounded-lg hover:bg-primary hover:text-white transition-all"
             >
-              <span>Load More Products</span>
+              <span>Browse All Products</span>
               <ChevronRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
