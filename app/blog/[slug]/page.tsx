@@ -6,6 +6,7 @@ import { siteConfig } from '@/site.config'
 import { isDuplicateArticle, getCanonicalSlug } from '@/lib/duplicate-articles'
 import { Star, ExternalLink } from 'lucide-react'
 import NewsletterSignup from '@/components/NewsletterSignup'
+import AffiliateLink from '@/components/AffiliateLink'
 
 interface Props {
   params: { slug: string }
@@ -146,15 +147,15 @@ export default function ArticlePage({ params }: Props) {
                           >
                             View details →
                           </Link>
-                          <a
+                          <AffiliateLink
                             href={product.affiliateUrl}
-                            target="_blank"
-                            rel="noopener noreferrer nofollow sponsored"
+                            productId={product.id}
+                            source={`article:${article.slug}`}
                             className="inline-flex items-center space-x-1 text-sm font-semibold bg-primary text-white px-3 py-1 rounded-lg hover:opacity-90"
                           >
                             <span>Check price</span>
                             <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
+                          </AffiliateLink>
                         </div>
                       </div>
                     </div>
@@ -201,15 +202,15 @@ export default function ArticlePage({ params }: Props) {
                       </span>
                       <span className="text-xs font-bold text-gray-900">{product.price}</span>
                     </div>
-                    <a
+                    <AffiliateLink
                       href={product.affiliateUrl}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow sponsored"
+                      productId={product.id}
+                      source={`article_picks:${article.slug}`}
                       className="mt-2 inline-flex items-center space-x-1 text-xs font-semibold bg-primary text-white px-3 py-1.5 rounded-lg hover:opacity-90"
                     >
                       <span>Check price</span>
                       <ExternalLink className="w-3 h-3" />
-                    </a>
+                    </AffiliateLink>
                   </div>
                 </div>
               ))}
@@ -251,14 +252,14 @@ export default function ArticlePage({ params }: Props) {
             product page — so you know instantly whether today&apos;s price is high
             or low. Includes optional price-drop alerts. No account required.
           </p>
-          <a
-            href="https://payhip.com/b/fLomD"
-            target="_blank"
-            rel="noopener noreferrer"
+          <AffiliateLink
+            href="https://payhip.com/b/fLomD?utm_source=content&utm_medium=organic&utm_campaign=pricetrack"
+            productId="pricetrack"
+            source={`article_offer:${article.slug}`}
             className="inline-flex items-center space-x-2 bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg hover:opacity-90 transition-opacity"
           >
             <span>Get PriceTrack — $9</span>
-          </a>
+          </AffiliateLink>
         </div>
 
         <NewsletterSignup />

@@ -2,6 +2,7 @@
 
 import { Star, ShoppingCart, ExternalLink, TrendingUp, Flame, Info } from 'lucide-react'
 import Link from 'next/link'
+import AffiliateLink from './AffiliateLink'
 
 interface Product {
   id: string
@@ -121,16 +122,17 @@ export default function ProductCard({ product }: { product: Product }) {
             <Info className="w-3.5 h-3.5" />
             <span>Details</span>
           </Link>
-          <a
+          <AffiliateLink
             href={product.affiliateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            productId={product.id}
+            source="product_card"
+            ariaLabel={`View ${product.title} on ${product.platform}`}
             className="flex-1 flex items-center justify-center space-x-1 bg-primary hover:bg-primary-600 text-white font-semibold py-2.5 px-3 rounded-lg transition-colors text-sm"
           >
             <ShoppingCart className="w-3.5 h-3.5" />
-            <span>Buy</span>
+            <span>View deal</span>
             <ExternalLink className="w-3 h-3 opacity-70" />
-          </a>
+          </AffiliateLink>
         </div>
       </div>
     </div>
