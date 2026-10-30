@@ -64,6 +64,10 @@ export default function ArticlePage({ params }: Props) {
     .reverse()
   if (!article) notFound()
 
+  // 变现：按文章类别匹配联盟产品（即使文章没有 productIds 也能出卡片）
+  const sameCat = featuredProducts.filter((p) => p.category === article.category)
+  const picks = (sameCat.length >= 2 ? sameCat : featuredProducts).slice(0, 3)
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-12 max-w-3xl">
@@ -160,6 +164,58 @@ export default function ArticlePage({ params }: Props) {
             </section>
           ))}
         </div>
+
+        {/* 类别匹配产品（变现） */}
+        {picks.length > 0 && (
+          <div className="mt-12">
+            <h3 className="text-xl font-bold text-gray-900 mb-1">
+              Top picks in {article.category}
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Live best-sellers with current prices — links open Amazon.
+            </p>
+            <div className="grid grid-cols-1 gap-4">
+              {picks.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex items-center gap-4 bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-all"
+                >
+                  <Link href={`/product/${product.id}`} className="shrink-0">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.title}
+                      className="w-20 h-20 object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                  </Link>
+                  <div className="flex-1 min-w-0">
+                    <Link href={`/product/${product.id}`}>
+                      <h4 className="font-semibold text-gray-900 hover:text-primary line-clamp-2 text-sm">
+                        {product.title}
+                      </h4>
+                    </Link>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="flex items-center text-amber-500 text-xs">
+                        <Star className="w-3.5 h-3.5 fill-current" />
+                        <span className="ml-1 font-medium">{product.rating}</span>
+                      </span>
+                      <span className="text-xs font-bold text-gray-900">{product.price}</span>
+                    </div>
+                    <a
+                      href={product.affiliateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow sponsored"
+                      className="mt-2 inline-flex items-center space-x-1 text-xs font-semibold bg-primary text-white px-3 py-1.5 rounded-lg hover:opacity-90"
+                    >
+                      <span>Check price</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Related guides (站内内链) */}
         {related.length > 0 && (
