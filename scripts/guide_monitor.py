@@ -62,6 +62,30 @@ def gsc_rows(days: int = 28):
     return rows, start.isoformat(), end.isoformat()
 
 
+def inspect_index_status(token: str):
+    statuses = {}
+    for path in GUIDES:
+        url = 'https://globalhotsellers.net' + path
+        try:
+            response = requests.post(
+                'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',
+                json={'inspectionUrl': url, 'siteUrl': SITE},
+                headers={'Authorization': f'Bearer {token}'},
+                timeout=60,
+            )
+            response.raise_for_status()
+            result = response.json().get('inspectionResult', {}).get('indexStatusResult', {})
+            statuses[path] = {
+                'verdict': result.get('verdict', 'UNKNOWN'),
+                'coverage_state': result.get('coverageState', 'Unknown'),
+                'last_crawl_time': result.get('lastCrawlTime', ''),
+                'page_fetch_state': result.get('pageFetchState', ''),
+            }
+        except Exception as exc:
+            statuses[path] = {'error': str(exc)}
+    return statuses
+
+
 def vercel_rows(days: int = 28):
     cmd = [
         'vercel', 'metrics', 'vercel.analytics_pageview.count',
@@ -91,7 +115,10 @@ def click_summary():
             timeout=60,
         )
         response.raise_for_status()
-        events = response.json().get('events', [])
+        events = [
+            event for event in response.json().get('events', [])
+            if event.get('source') != 'monitor-smoke'
+        ]
         return {
             'configured': True,
             'total': len(events),
@@ -105,10 +132,16 @@ def click_summary():
 def main():
     errors = []
     try:
+        g, token = load_gsc_helpers(), None
         gsc, start, end = gsc_rows()
+        # Reuse the same OAuth token for URL Inspection. gsc_rows creates a new
+        # token internally, so retrieve one here for the inspection calls.
+        token = g.get_token(g.CRED)
+        index_status = inspect_index_status(token)
     except Exception as exc:
         gsc, start, end = [], '', ''
-        errors.append(f'GSC: {exc}')
+        index_status = {path: {'error': str(exc)} for path in GUIDES}
+        errors.append(f'GSC/Index status: {exc}')
     try:
         analytics = vercel_rows()
     except Exception as exc:
@@ -127,6 +160,7 @@ def main():
             'google_clicks': int(row.get('clicks', 0)),
             'google_position': round(float(row.get('position', 0)), 1),
             'pageviews': int(pageviews.get('vercel_analytics_pageview_count_sum', 0)),
+            'index_status': index_status.get(path, {}),
         })
 
     clicks = click_summary()

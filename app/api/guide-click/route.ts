@@ -1,4 +1,4 @@
-import { put, get } from '@vercel/blob'
+import { put, get, del } from '@vercel/blob'
 
 const BLOB_PATH = 'guide-clicks.json'
 const MAX_EVENTS = 5000
@@ -69,4 +69,15 @@ export async function GET(request: Request) {
     total: events.length,
     events: events.slice(-500).reverse(),
   })
+}
+
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url)
+  const token = searchParams.get('token')
+  if (!token || token !== process.env.ANALYTICS_TOKEN) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  await del(BLOB_PATH)
+  return Response.json({ ok: true, cleared: true })
 }
