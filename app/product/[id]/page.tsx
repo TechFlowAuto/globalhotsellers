@@ -22,7 +22,7 @@ export async function generateMetadata({
     }
   }
   return {
-    title: `${product.title} | GlobalHotSellers`,
+    title: product.title,
     description: product.description,
     alternates: { canonical: `${BASE_URL}/product/${product.id}` },
     openGraph: {
@@ -49,8 +49,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     return <ProductClient id={params.id} />
   }
 
-  // Product structured data (JSON-LD) for rich results
-  const priceNum = parseFloat(product.price.replace(/[^0-9.]/g, ''))
+  // Do not cache marketplace prices, stock status or review counts in structured
+  // data. Those fields change frequently and must be verified on Amazon.
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -58,29 +58,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     description: product.description,
     image: `${BASE_URL}${product.imageUrl}`,
     sku: product.id,
-    brand: {
-      '@type': 'Brand',
-      name: product.source,
-    },
     offers: {
       '@type': 'Offer',
       url: product.affiliateUrl,
-      priceCurrency: 'USD',
-      price: isNaN(priceNum) ? undefined : priceNum,
-      availability: 'https://schema.org/InStock',
       seller: {
         '@type': 'Organization',
         name: product.platform,
       },
     },
-  }
-  if (product.rating > 0) {
-    jsonLd.aggregateRating = {
-      '@type': 'AggregateRating',
-      ratingValue: product.rating,
-      reviewCount: product.reviewCount,
-      bestRating: 5,
-    }
   }
 
   return (

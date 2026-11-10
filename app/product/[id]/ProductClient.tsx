@@ -92,7 +92,6 @@ export default function ProductClient({ id }: ProductClientProps) {
   }
 
   const BadgeIcon = product.badge ? badgeConfig[product.badge].icon : null
-  const ratingPercent = product.rating / 5 * 100
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -147,35 +146,13 @@ export default function ProductClient({ id }: ProductClientProps) {
                 {product.title}
               </h1>
 
-              {/* Rating */}
-              {product.rating > 0 && (
-                <div className="flex items-center space-x-2 mb-6">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 ${
-                          i < Math.floor(product.rating)
-                            ? 'text-yellow-400 fill-yellow-400'
-                            : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="font-bold text-gray-900">{product.rating}</span>
-                  <span className="text-gray-500">({product.reviewCount.toLocaleString()} reviews)</span>
-                </div>
-              )}
+              <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+                <strong>Check the current listing:</strong> price, seller, availability and rating can change. We do not cache them as a current offer.
+              </div>
 
-              {/* Price */}
-              <div className="flex items-baseline space-x-3 mb-6">
-                <span className="text-4xl font-bold text-primary">{product.price}</span>
-                {product.originalPrice && (
-                  <span className="text-xl text-gray-400 line-through">{product.originalPrice}</span>
-                )}
-                <span className="text-sm text-green-600 font-semibold bg-green-100 px-2 py-1 rounded">
-                  Save ${parseInt(product.originalPrice?.replace(/[$,]/g, '') || '0') - parseInt(product.price.replace(/[$,]/g, '') || '0')}
-                </span>
+              <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-4 text-xs leading-5 text-gray-600">
+                As an Amazon Associate, we earn from qualifying purchases. Read our{' '}
+                <a href="/affiliate-disclosure" className="font-semibold text-primary underline">affiliate disclosure</a>.
               </div>
 
               {/* Description */}
@@ -194,11 +171,11 @@ export default function ProductClient({ id }: ProductClientProps) {
                 <a
                   href={product.affiliateUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow sponsored"
                   className="flex-1 flex items-center justify-center space-x-2 bg-primary hover:bg-primary-600 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-md hover:shadow-lg"
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  <span>View Deal on Amazon</span>
+                  <span>Check current price on Amazon</span>
                   <ExternalLink className="w-4 h-4 opacity-70" />
                 </a>
               </div>
@@ -291,11 +268,11 @@ export default function ProductClient({ id }: ProductClientProps) {
           <a
             href={product.affiliateUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow sponsored"
             className="inline-flex items-center space-x-2 bg-white text-primary font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-lg"
           >
             <ShoppingCart className="w-5 h-5" />
-            <span>Buy on Amazon — {product.price}</span>
+            <span>Check current price on Amazon</span>
             <ExternalLink className="w-4 h-4 opacity-60" />
           </a>
         </div>

@@ -4,10 +4,11 @@ import { articles, getArticle } from '@/data/articles'
 import { featuredProducts } from '@/data/products'
 import { siteConfig } from '@/site.config'
 import { isDuplicateArticle, getCanonicalSlug } from '@/lib/duplicate-articles'
-import { Star, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import AffiliateLink from '@/components/AffiliateLink'
 import { getArticleOverride } from '@/lib/article-overrides'
+import { isArticleIndexable } from '@/lib/article-quality'
 
 interface Props {
   params: { slug: string }
@@ -28,10 +29,13 @@ export async function generateMetadata({ params }: Props) {
   const metaTitle = override?.title ?? article.title
   const metaDescription = override?.description ?? article.description
 
+  const indexable = !isDuplicateArticle(article.slug) && isArticleIndexable(article.slug)
+
   const meta: Record<string, unknown> = {
     title: metaTitle,
     description: metaDescription,
     keywords: article.keywords.join(', '),
+    robots: indexable ? undefined : { index: false, follow: true },
     alternates: { canonical: `${siteConfig.domain}/blog/${canonical ?? article.slug}` },
     openGraph: {
       title: metaTitle,
@@ -155,15 +159,8 @@ export default function ArticlePage({ params }: Props) {
                           </h3>
                         </Link>
                         <div className="flex items-center space-x-2 mt-1">
-                          <span className="flex items-center text-amber-500 text-sm">
-                            <Star className="w-4 h-4 fill-current" />
-                            <span className="ml-1 font-medium">{product.rating}</span>
-                          </span>
-                          <span className="text-xs text-gray-400">
-                            ({product.reviewCount.toLocaleString()} reviews)
-                          </span>
-                          <span className="text-sm font-bold text-gray-900 ml-2">
-                            {product.price}
+                          <span className="text-xs text-gray-500">
+                            Check current rating and price on Amazon
                           </span>
                         </div>
                         <div className="mt-2 flex items-center space-x-3">
@@ -222,11 +219,7 @@ export default function ArticlePage({ params }: Props) {
                       </h4>
                     </Link>
                     <div className="flex items-center space-x-2 mt-1">
-                      <span className="flex items-center text-amber-500 text-xs">
-                        <Star className="w-3.5 h-3.5 fill-current" />
-                        <span className="ml-1 font-medium">{product.rating}</span>
-                      </span>
-                      <span className="text-xs font-bold text-gray-900">{product.price}</span>
+                      <span className="text-xs text-gray-500">Check current rating and price on Amazon</span>
                     </div>
                     <AffiliateLink
                       href={product.affiliateUrl}

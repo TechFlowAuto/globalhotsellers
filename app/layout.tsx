@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} - ${siteConfig.tagline}`,
     template: `%s | ${SITE_NAME}`,
   },
-  description: siteConfig.tagline,
-  keywords: 'hot products, best sellers, trending items, deals, global shopping',
+  description: 'Scenario-first buying guides for everyday tech and small-space living. Compare trade-offs before checking the live price.',
+  keywords: 'buying guides, product comparisons, small-space home, everyday tech, amazon product guide',
   openGraph: {
     title: `${SITE_NAME} - ${siteConfig.tagline}`,
-    description: siteConfig.tagline,
+    description: 'Scenario-first buying guides for everyday tech and small-space living.',
     type: 'website',
     locale: 'en_US',
     url: siteConfig.domain,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${SITE_NAME} - ${siteConfig.tagline}`,
-    description: siteConfig.tagline,
+    description: 'Scenario-first buying guides for everyday tech and small-space living.',
     creator: '@GlobalHotSellers',
   },
   metadataBase: new URL(siteConfig.domain),

@@ -1,6 +1,6 @@
 'use client'
 
-import { Star, ShoppingCart, ExternalLink, TrendingUp, Flame, Info } from 'lucide-react'
+import { ShoppingCart, ExternalLink, TrendingUp, Flame, Info } from 'lucide-react'
 import Link from 'next/link'
 import AffiliateLink from './AffiliateLink'
 
@@ -74,34 +74,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </h3>
         </Link>
         
-        {/* Rating */}
-        {product.rating > 0 && (
-          <div className="flex items-center space-x-1 mb-2">
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-3.5 h-3.5 ${
-                    i < Math.floor(product.rating)
-                      ? 'text-yellow-400 fill-yellow-400'
-                      : 'text-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-gray-500">
-              ({product.reviewCount.toLocaleString()})
-            </span>
-          </div>
-        )}
-
-        {/* Price */}
-        <div className="flex items-center space-x-2 mb-3">
-          <span className="text-xl font-bold text-primary">{product.price}</span>
-          {product.originalPrice && (
-            <span className="text-sm text-gray-400 line-through">{product.originalPrice}</span>
-          )}
-        </div>
+        <p className="mb-3 text-xs font-medium text-gray-500">Check current price, rating and seller on Amazon</p>
 
         {/* Description */}
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">

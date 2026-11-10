@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, Flame } from 'lucide-react'
+import { Menu, X, BookOpen } from 'lucide-react'
 import { siteConfig } from '@/site.config'
 
 export default function Navbar() {
@@ -10,90 +10,58 @@ export default function Navbar() {
 
   const navItems = [
     { label: 'Home', href: '/' },
-    { label: 'Hot Products', href: '/products' },
-    { label: 'Categories', href: '/categories' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Seller Tools', href: '/seller-tools' },
+    { label: 'Buying Guides', href: '/guides' },
+    { label: 'Products', href: '/products' },
+    { label: 'How We Choose', href: '/editorial-policy' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md">
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-lg">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
               <span className="text-xl">{siteConfig.logoEmoji}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-gray-900">{siteConfig.name}</span>
-              <span className="text-xs text-gray-500">{siteConfig.tagline}</span>
+              <span className="text-xs text-gray-500">Practical buying guides</span>
             </div>
-          </div>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden items-center space-x-7 md:flex">
             {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-gray-700 hover:text-primary font-medium transition-colors"
-              >
+              <Link key={item.label} href={item.href} className="text-sm font-medium text-gray-700 transition hover:text-primary">
                 {item.label}
               </Link>
             ))}
           </div>
 
-          {/* Search and Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/products"
-              className="btn-primary flex items-center space-x-2"
-            >
-              <Flame className="w-4 h-4" />
-              <span>Trending Now</span>
+          <div className="hidden md:block">
+            <Link href="/guides" className="btn-primary flex items-center space-x-2 text-sm">
+              <BookOpen className="h-4 w-4" />
+              <span>Buying guides</span>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
+          <button className="md:hidden" aria-label="Open navigation" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <div className="flex flex-col space-y-4">
+          <div className="border-t py-4 md:hidden">
+            <div className="flex flex-col space-y-3">
               {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-gray-700 hover:text-primary font-medium py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+                <Link key={item.label} href={item.href} className="py-2 font-medium text-gray-700 hover:text-primary" onClick={() => setIsMenuOpen(false)}>
                   {item.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t">
-                <Link
-                  href="/products"
-                  className="w-full btn-primary flex items-center justify-center space-x-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Flame className="w-4 h-4" />
-                  <span>Trending Now</span>
-                </Link>
-              </div>
+              <Link href="/guides" className="btn-primary mt-2 flex items-center justify-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                <BookOpen className="h-4 w-4" /> Browse buying guides
+              </Link>
             </div>
           </div>
         )}
