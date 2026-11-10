@@ -85,5 +85,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ]
 
-  return [...staticPages, ...productPages, ...guidePages]
+  return [...staticPages, ...guidePages]
 }

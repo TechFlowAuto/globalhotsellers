@@ -20,6 +20,34 @@ export default function AffiliateLink({
   children,
   ariaLabel,
 }: Props) {
+  function handleClick() {
+    const path = window.location.pathname
+    track('affiliate_click', {
+      productId: productId || 'unknown',
+      source,
+    })
+
+    if (!path.startsWith('/guides')) return
+
+    const payload = JSON.stringify({
+      path,
+      productId: productId || 'unknown',
+      source,
+      referrer: document.referrer,
+    })
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/guide-click', new Blob([payload], { type: 'application/json' }))
+    } else {
+      fetch('/api/guide-click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+      }).catch(() => undefined)
+    }
+  }
+
   return (
     <a
       href={href}
@@ -27,12 +55,7 @@ export default function AffiliateLink({
       rel="noopener noreferrer nofollow sponsored"
       className={className}
       aria-label={ariaLabel}
-      onClick={() =>
-        track('affiliate_click', {
-          productId: productId || 'unknown',
-          source,
-        })
-      }
+      onClick={handleClick}
     >
       {children}
     </a>
