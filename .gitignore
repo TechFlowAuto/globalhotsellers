@@ -28,3 +28,6 @@ config/pinterest.json
 
 # Runtime guide monitoring output
 data/.guide-monitor.json
+
+# Runtime monitor notification state
+data/.guide-monitor-notified.json
