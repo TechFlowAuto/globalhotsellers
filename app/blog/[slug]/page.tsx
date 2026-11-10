@@ -7,6 +7,7 @@ import { isDuplicateArticle, getCanonicalSlug } from '@/lib/duplicate-articles'
 import { Star, ExternalLink } from 'lucide-react'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import AffiliateLink from '@/components/AffiliateLink'
+import { getArticleOverride } from '@/lib/article-overrides'
 
 interface Props {
   params: { slug: string }
@@ -23,14 +24,18 @@ export async function generateMetadata({ params }: Props) {
   // 重复页（同一主关键词被历史 bug 多次生成）→ noindex，并把 canonical
   // 指向最早的那一篇，避免搜索引擎把 56 个近似页面当成重复内容。
   const canonical = getCanonicalSlug(article.slug)
+  const override = getArticleOverride(params.slug)
+  const metaTitle = override?.title ?? article.title
+  const metaDescription = override?.description ?? article.description
+
   const meta: Record<string, unknown> = {
-    title: article.title,
-    description: article.description,
+    title: metaTitle,
+    description: metaDescription,
     keywords: article.keywords.join(', '),
     alternates: { canonical: `${siteConfig.domain}/blog/${canonical ?? article.slug}` },
     openGraph: {
-      title: article.title,
-      description: article.description,
+      title: metaTitle,
+      description: metaDescription,
       type: 'article',
       url: `${siteConfig.domain}/blog/${article.slug}`,
       siteName: siteConfig.name,
@@ -65,6 +70,10 @@ export default function ArticlePage({ params }: Props) {
     .reverse()
   if (!article) notFound()
 
+  const override = getArticleOverride(article.slug)
+  const heroTitle = override?.title ?? article.title
+  const heroDescription = override?.description ?? article.description
+
   // 变现：按文章类别匹配联盟产品（即使文章没有 productIds 也能出卡片）
   const sameCat = featuredProducts.filter((p) => p.category === article.category)
   const picks = (sameCat.length >= 2 ? sameCat : featuredProducts).slice(0, 3)
@@ -89,11 +98,28 @@ export default function ArticlePage({ params }: Props) {
             </span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-            {article.emoji} {article.title}
+            {article.emoji} {heroTitle}
           </h1>
           <p className="text-lg text-gray-600 mt-4 leading-relaxed">
-            {article.description}
+            {heroDescription}
           </p>
+
+          {override?.heroCta && (
+            <div className="mt-6 rounded-xl border border-gray-200 bg-white p-5">
+              <p className="text-sm font-semibold text-gray-900">
+                {override.heroCta.heading}
+              </p>
+              <p className="text-sm text-gray-600 mt-1">
+                {override.heroCta.body}
+              </p>
+              <Link
+                href={override.heroCta.href}
+                className="inline-flex items-center mt-3 text-sm font-semibold bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90"
+              >
+                {override.heroCta.label}
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Body */}
