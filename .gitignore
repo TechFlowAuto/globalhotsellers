@@ -22,3 +22,9 @@ config/pinterest.json
 
 # Local visual QA artifacts
 .playwright-cli/
+
+# Local analytics token
+.analytics-token
+
+# Runtime guide monitoring output
+data/.guide-monitor.json
