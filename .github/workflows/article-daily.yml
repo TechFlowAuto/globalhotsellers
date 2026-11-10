@@ -2,11 +2,8 @@ name: Daily Article (GHS)
 
 on:
   schedule:
-    # Asia/Shanghai 07:30 / 12:30 / 18:30 / 22:30 (UTC+8)
+    # Asia/Shanghai 07:30 only (reduced from 4/day on 2026-11-10)
     - cron: "30 23 * * *"
-    - cron: "30 4 * * *"
-    - cron: "30 10 * * *"
-    - cron: "30 14 * * *"
   push:
     paths:
       - '.github/workflows/article-daily.yml'
